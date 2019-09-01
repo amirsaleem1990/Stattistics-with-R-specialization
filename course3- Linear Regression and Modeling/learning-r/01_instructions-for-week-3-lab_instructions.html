@@ -1,0 +1,188 @@
+<meta charset="utf-8"/>
+<co-content>
+ <h2 level="2">
+  Install and load a new R package:
+ </h2>
+ <p>
+  We will use package GGally in this lab. If you haven't done so in Week 1 &amp; 2 lab, launch RStudio, add the following commands in the
+  <strong>
+   Console
+  </strong>
+  :
+ </p>
+ <pre language="r">install.packages("GGally")
+library(GGally)</pre>
+ <h2 level="2">
+  Download and Knit the lab:
+ </h2>
+ <p>
+  Download the R Markdown (Rmd) file, open it in RStudio, and click on Knit. This document contains the instructions for the lab.
+  <strong>
+   IMPORTANT:
+  </strong>
+  Use right-click, then save link as to save the below R Markdown file. If Chrome doesn't work, switch to Firefox or other browsers when downloading the file. You must download and Knit this file and be able to view the instructions in it to complete the this week's Lab, so make sure to complete these steps before starting the lab.
+ </p>
+ <asset assettype="generic" extension="Rmd" id="mZqh8k3rEealpAoth2FRAw" name="multiple_regression_Coursera">
+ </asset>
+ <p>
+  As you go through the contents of the lab instructions document you will encounter multiple choice questions, make sure to
+  <strong>
+   submit your answers
+  </strong>
+  to those questions in the lab section (next item) to get credit. The ones marked with Exercise are for your own practice -- you don't need to submit your answers to them.
+ </p>
+ <h1 level="1">
+  If you have not completed Week 1 &amp; 2 Lab:
+ </h1>
+ <p>
+  You will need to first complete the following before you can work on Week 3 Lab:
+ </p>
+ <h2 level="2">
+  Install R and RStudio:
+ </h2>
+ <p>
+  First, you will need to install R and RStudio. R is the name of the programming language itself and RStudio is a convenient interface.
+ </p>
+ <ul bullettype="bullets">
+  <li>
+   <p>
+    <strong>
+     Install R:
+    </strong>
+    Go to
+    <a href="https://cran.r-project.org/">
+     https://cran.r-project.org/
+    </a>
+    and follow the link for your operating system.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Install RStudio:
+    </strong>
+    Go to
+    <a href="https://www.rstudio.com/products/rstudio/download/">
+     https://www.rstudio.com/products/rstudio/download/
+    </a>
+    and click on the installer link for your operating system.
+   </p>
+  </li>
+ </ul>
+ <p>
+  See
+  <a href="http://www.youtube.com/watch?v=eD07NznguA4">
+   this video
+  </a>
+  for step-by-step installation instructions if needed.
+ </p>
+ <p>
+  <strong>
+   NOTE:
+  </strong>
+  If you already have R and RStudio installed, you should still visit these links to confirm that you have the most recent versions of these software. The most recent version of R can be found on
+  <a href="https://www.r-project.org/">
+   The R Project for Statistical Computing
+  </a>
+  page and the most recent version of RStudio can be found on the
+  <a href="https://www.rstudio.com/products/rstudio/download/">
+   Download RStudio page
+  </a>
+  . Please install the most recent versions before proceeding.
+ </p>
+ <h2 level="2">
+  Install R packages:
+ </h2>
+ <h3 level="3">
+  Install and load devtools:
+ </h3>
+ <p>
+  We will use the devtools package to install the statsr package associated with this course. We need to install and load this package. Launch RStudio, and the following commands in the
+  <strong>
+   Console
+  </strong>
+  :
+ </p>
+ <pre language="r">install.packages("devtools")
+library(devtools)</pre>
+ <h3 level="3">
+  Install all other packages:
+ </h3>
+ <p>
+  Now we can install the rest of the packages we will use in this lab. Type the following commands in the
+  <strong>
+   Console
+  </strong>
+  as well:
+ </p>
+ <pre language="r">install.packages("dplyr")
+install.packages("ggplot2")
+install_github("StatsWithR/statsr")
+</pre>
+ <p>
+  The uses of these packages will be discussed in detail in the lab(s).
+ </p>
+ <p>
+  If install_github breaks on Windows with UNC network paths or sometimes when there are places in the path name, you may follow our mentor David Hood's (thanks, David) solution
+  <strong>
+   <a href="https://www.coursera.org/learn/probability-intro/discussions/all/threads/VsyQg25OEeasOQpiYXGJHw/replies/59WfYt2zEeamOQrEZFd47A/comments/vaFGhN7sEeaKchJ1BUTG8A">
+    here
+   </a>
+  </strong>
+  in course 1.
+ </p>
+ <h3 level="3">
+  IMPORTANT:
+ </h3>
+ <p>
+  Re-install the statsr package even if you have not done so before. We have added new data and functionality to the package that will be required for this lab.
+ </p>
+</co-content>
+<style>
+ body {
+    padding: 50px 85px 50px 85px;
+}
+
+table th, table td {
+    border: 1px solid #e0e0e0;
+    padding: 5px 20px;
+    text-align: left;
+}
+input {
+    margin: 10px;
+}
+}
+th {
+    font-weight: bold;
+}
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+pre {
+    display: block;
+    margin: 20px;
+    background: #424242;
+    color: #fff;
+    font-size: 13px;
+    white-space: pre-wrap;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    border: 1px solid #ccc;
+}
+</style>
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ['$','$'] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>

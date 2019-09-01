@@ -1,0 +1,28 @@
+importent variables:
+
+numadult: Number Of Adults In Household
+nummen: Number Of Adult Men In Household
+numwomen: Number Of Adult Women In Household
+genhlth: General Health
+hlthpln1: Have Any Health Care Coverage
+persdoc2: Multiple Health Care Professionals
+medcost: Could Not See Dr. Because Of Cost
+sleptim1: How Much Time Do You Sleep
+cvdinfr4: Ever Diagnosed With Heart Attack
+asthma3: Ever Told Had Asthma
+marital: Marital StatusW
+children: Number Of Children In Household
+educa: Education Level
+employ1: Employment Status
+income2: Income Level
+weight2: Reported Weight In Pounds
+height3: Reported Height In Feet And Inches
+cpdemo1: Do You Have A Cell Phone For Personal Use?
+cpdemo4: What Percent Of All Calls Are Received On Your Cell Phone?
+internet: Internet Use In The Past 30 Days?
+cvdstrk3: Ever Diagnosed With A Stroke
+renthom1: Own Or Rent Home
+sex: Respondents Sex
+smokday2: Frequency Of Days Now Smoking
+fruit1: How Many Times Did You Eat Fruit?
+cadult: Are You 18 Years Of Age Or Older?

@@ -1,0 +1,167 @@
+---
+title: "Project"
+author: "Amir saleem"
+date: "February 8, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Load the Data
+```{r 1, echo=T}
+load("movies.Rdata")
+cat("IN this data we have ", nrow(movies), "rows, and ", ncol(movies), "Columns")
+```
+
+
+
+# summary of Data
+```{r 2, echo=T}
+summary(movies)
+```
+
+
+# Data structure
+```{r 3, echo=T}
+str(movies)
+```
+
+
+
+
+# As we see here, these are many character variable, we pick one after one, check unique items in that variable, if each level have more than 30 observations, we convert that char vector to factor variable and than create dummy variables for that variable, else we remove that variable
+```{r 4, echo=T}
+for(i in list("title", 'director', 'actor1', 'actor2', 'actor3', 'actor4', 'actor5', 'imdb_url', 'rt_url')){
+    cat(i, " have ", length(unique(movies[[i]])), 
+        " unique values among ", nrow(movies),
+        " values, so each unique value repeated ", 
+        round(nrow(movies) / length(unique(movies[[i]])),2), 
+        " time only\n")
+    }
+```
+
+# Letus remove these char variables
+```{r 5, echo=T}
+columns_to_remove  <- c("title", 'director', 'actor1', 'actor2', 'actor3', 'actor4', 'actor5', 'imdb_url', 'rt_url')
+movies  <- movies[, -which(names(movies) %in% columns_to_remove)]
+```
+
+# In the course we not learn time seiries, but we have to chack correlation between date variables and our dependent variable
+# here we see correlation metrix, maximux correlation is 0.11622770 which is very very low. 
+```{r 6, echo=T}
+cor(movies[,c('audience_score','thtr_rel_year', 'thtr_rel_month','thtr_rel_day')])
+```
+
+# Now we build a linear model with these date variables, and see coefficients.
+# as we can see here the p values are very large, so we fail to rejuct Null hypothesis.
+```{r 7, echo=T}
+summary(lm(audience_score ~ thtr_rel_year + thtr_rel_month + thtr_rel_day, data=movies))$coefficients
+```
+
+
+## so we not use these date variables to fit the model.
+```{r 8, echo=T}
+columns_to_remove  <- c('thtr_rel_year', 'thtr_rel_month','thtr_rel_day')
+movies  <- movies[, -which(names(movies) %in% columns_to_remove)]
+```
+
+# Now we check what variables should we use to build our final model.
+## Forward selection
+### First variable selection
+#### The best adjusted R square with variable imdb_rating with 0.7476034, and since this new adjusted R squre is grater than past  so we add this variable to our baseline model 
+```{r 9, echo=T}
+options(warn=-1)
+library(dplyr)
+nam <- c()
+val  <- c()
+for (i in names(movies[, -14])){
+    nam  <- append(nam, i)
+    val  <- append(val, summary(lm(audience_score ~ movies[[i]], data = movies))$adj.r.squared)
+}
+a  <- data.frame(nam, val)
+arrange(a, desc(val))[1,]
+```
+#let usu define two functions two rest outself from repeating the typing in order to know best variable in our way in forward selection with adjusted R squared}
+```{r 10, echo=T}
+options(warn=-1)
+ok_vars  <- c('audience_score')
+variable_selection <- function(ok_vars, balance_variables){
+  nam <- c()
+  val  <- c()
+  for (i in balance_variables){
+    nam  <- append(nam, i)
+    
+    a = paste("audience_score ~ ", paste(ok_vars[2:length(ok_vars)], collapse=" + "))
+    b = formula(paste(a,ok_vars,i, sep = " + "))
+    model  <- lm(b, data=movies)
+    
+    val  <- append(val,summary(model)$adj.r.squared)
+  }
+  a  <- data.frame(nam, val)
+  print(arrange(a, desc(val))[1,])
+}
+update <- function(n){
+  ok_vars <<- append(ok_vars, n)
+  balance_vars <<- names(movies)[!names(movies) %in% ok_vars]
+}
+```
+
+### second variable selection
+#### The best adjusted R square with variable audience_rating with 0.8818155, and since this new adjusted R squre is grater than past  so we add this variable to our baseline model 
+```{r 11, echo=T}
+update('imdb_rating')
+variable_selection(ok_vars, balance_vars)
+```
+
+### Third variable selection
+#### The best adjusted R square with variable genre with 0.8847392, and since this new adjusted R squre is grater than past we add this variable to our baseline model 
+
+```{r 12, echo=T}
+update('audience_rating')
+variable_selection(ok_vars, balance_vars)
+```
+
+### Fourth variable selection
+#### The best adjusted R square with variable studio with 0.8872602, and since this new adjusted R squre is grater than past we add this variable to our baseline model 
+```{r 13, echo=T}
+update('genre')
+variable_selection(ok_vars, balance_vars)
+```
+
+
+### Fifth variable selection
+#### The best adjusted R square with variable best_pic_nom with 0.8880449, and since this new adjusted R squre is grater than past we add this variable to our baseline model 
+```{r 14, echo=T}
+update('studio')
+variable_selection(ok_vars, balance_vars)
+```
+
+### Sixth variable selection
+#### The best adjusted R square with variable runtime with 0.8888408, and since this new adjusted R squre is grater than past we add this variable to our baseline model 
+```{r 15, echo=T}
+update('best_pic_nom')
+variable_selection(ok_vars, balance_vars)
+```
+### 7th variable selection
+#### The best adjusted R square with variable best_actress_win with 0.889097, and since this new adjusted R squre is grater than past we add this variable to our baseline model 
+```{r 16, echo=T}
+update('runtime')
+variable_selection(ok_vars, balance_vars)
+```
+
+### 8th variable selection
+#### ouch... Here we can see that the Rsquare is 0.8890487 which is smaller than prives, so we stop here, and left reamining variables.
+```{r 17, echo=T}
+update('title_type')
+variable_selection(ok_vars, balance_vars) 
+```
+
+# so our final model (forward selection, considiring adjusted Rsquare) have 7 variables, which is: c("audience_score","imdb_rating","audience_rating","genre","studio","best_pic_nom","runtime"). let us delete "title_type" from our list
+```{r 18, echo=T}
+ok_vars <- ok_vars[1:length(ok_vars)-1]
+```
+
+
+
+

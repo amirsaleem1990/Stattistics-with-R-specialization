@@ -1,0 +1,118 @@
+---
+title: "Exploring the BRFSS data"
+output: 
+  html_document: 
+    fig_height: 4
+    highlight: pygments
+    theme: spacelab
+---
+
+## Setup
+
+### Load packages
+
+```{r load-packages, message = FALSE}
+
+
+library(ggplot2)
+library(dplyr)
+library(plotly)
+```
+
+### Load data
+
+Make sure your data and R Markdown files are in the same directory. When loaded
+your data file will be called `brfss2013`. Delete this note when before you submit 
+your work. 
+
+```{r load-data}
+load("brfss2013.RData")
+```
+
+
+
+* * *
+
+## Part 1: Data
+
+
+* * *
+
+## Part 2: Research questions
+
+**Research quesion 1:**
+males vs females in income variable. 
+
+**Research quesion 2:**
+
+**Research quesion 3:**
+
+
+* * *
+
+## Part 3: Exploratory data analysis
+
+NOTE: Insert code chunks as needed by clicking on the "Insert a new code chunk" 
+button (green button with orange arrow) above. Make sure that your code is visible
+in the project you submit. Delete this note when before you submit your work.
+
+**Research quesion 1:**
+
+```{r}
+df <- brfss2013[,c('income2','sex')]
+df$total_sex <- ifelse(df$sex == 'Male' , count(df, sex)[1,2][[1]], count(df, sex)[2,2][[1]])
+dff <- df %>% 
+    group_by(sex, income2 ) %>% 
+    summarise(count = n(), total = mean(total_sex), percent = count / total)
+dff <- na.omit(dff)
+dff <- select(dff, income2, sex, percent)
+x = c('< $10000', '< $15000', '< $25000', '< $35000', '<$50000', '< $75000', '>= 75000')
+ggplot(data=dff, aes(x=income2, y=percent, fill=sex)) +
+    geom_bar(stat="identity")+#, position=position_dodge()
+  theme(axis.text.x  = element_text(angle=90, vjust=0.5, size=12))
+```
+
+
+
+**Research quesion 2:**
+
+```{r}
+df <- na.omit(brfss2013[,c("genhlth", "hlthpln1", "marital", "sleptim1")])
+gp <- df %>%
+    group_by(genhlth, hlthpln1) %>%
+    summarise(count = n(), avg.sleptime = mean(sleptim1))
+ggplot(gp, aes(x = genhlth, y = avg.sleptime, fill=hlthpln1)) + geom_bar(stat="identity")
+```
+
+
+
+**Research quesion 3:**
+
+```{r}
+brfss2013_rest_genhlth <- brfss2013 %>% filter(misrstls != "NA") %>% mutate(gen_hlth = ifelse(genhlth == "Poor", "Poor", "Good")) %>% filter(gen_hlth != "NA")
+ggplot(brfss2013_rest_genhlth, aes(x = misrstls, fill = gen_hlth)) + geom_bar(position=position_dodge()) + scale_fill_discrete(name = "General Health") + xlab("Frequency of restless days") + ylab("Proportion")
+```
+df <- brfss2013[, c('children', 'sex', 'genhlth')]
+df <- na.omit(df)
+gp <- df %>%
+    group_by(children, genhlth, sex) %>%
+    summarise(count = n())
+gp$genhelth <- NaN
+gp$genhelth[gp$genhlth == 'Excellent'] <- 5
+gp$genhelth[gp$genhlth == 'Very good'] <- 4
+gp$genhelth[gp$genhlth == 'Good'] <- 3
+gp$genhelth[gp$genhlth == 'Fair'] <- 2
+gp$genhelth[gp$genhlth == 'Poor'] <- 1
+ggplot(gp, aes(x = children, y = genhelth)) + geom_bar(stat="identity", position = 'dodge')#, fill=sex
+
+
+
+
+
+df <- brfss2013[, c('educa', 'sex', 'income2')]
+df <- na.omit(df)
+gp <- df %>%
+    group_by(educa, sex) %>%
+    summarise(count = n())
+ggplot(data = gp, aes(x = educa, y = count, fill = sex)) + geom_bar(stat = 'identity', position = 'dodge')+
+theme(axis.text.x  = element_text(angle=90))

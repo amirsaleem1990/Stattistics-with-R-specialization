@@ -1,0 +1,1411 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg-flat.dtd" >
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+
+<title>Effective Sample Size | The n-Category Caf&#xE9;</title>
+
+<meta name="ICBM" content="30.2893, -97.7367" />
+<meta name="DC.title" content="The n-Category Caf&#xE9;" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<style type="text/css" media="all" title="The n-Category Caf&#xE9; Stylesheet">@import url("/category/styles-site.css");</style>
+<link rel="stylesheet" href="/category/print.css" type="text/css" media="print" />
+
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0" href="/category/atom10.xml" />
+<link rel="alternate" type="application/atom+xml" title="Atom 1.0 Comments Feed" href="/category/comments.atom" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/category/rsd.xml" />
+<link rel="shortcut icon" type="image/x-icon" href="/category/images/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="/category/images/favicon2.ico" />
+<link rel="pgpkey" href="/category/urs.asc" title="Urs Schreiber's PGP Public Key" />
+<link rel="start" href="/category/" title="Home" />
+<link rel="search" href="/cgi-bin/MT-3.0/mt-search.cgi?IncludeBlogs=3&amp;Template=category" title="Search" />
+<link rel="contents" href="/category/archives.html" title="Comprehensive List of Blog Entries" />
+
+
+<link rel="bookmark" href="#content" title="Main Content" />
+<link rel="bookmark" href="#comments" title="Comments" />
+<link rel="bookmark" href="#search" title="Search Box" />
+<link rel="bookmark" href="#related" title="Related entries" />
+<link rel="bookmark" href="#AccessKeyList" title="AccessKeys" />
+<link rel="prev" href="/category/2014/12/welcome_qiaochu.html" title="Welcome, Qiaochu!" />
+<link rel="next" href="/category/2014/12/competing_foundations.html" title="Competing Foundations?" />
+<link rel="up" href="/category/2014/12/" title="December, 2014" />
+
+<script type="text/javascript" src="/category/prototype.js"></script>
+<script type="text/javascript" src="/category/ie.js"></script>
+<script type="text/x-mathjax-config">
+  <!--//--><![CDATA[//><!--
+    MathJax.Hub.Config({
+      MathML: { useMathMLspacing: true },
+      "HTML-CSS": { scale: 90,
+                    noReflows: false,
+                    extensions: ["handle-floats.js"],
+                    linebreaks: { width: "container" }
+       }
+    });
+    MathJax.Hub.Queue( function () {
+       var fos = document.getElementsByTagName('foreignObject');
+       for (var i = 0; i < fos.length; i++) {
+         MathJax.Hub.Typeset(fos[i]);
+       }
+    });
+  //--><!]]>
+</script>
+<script type="text/javascript">
+  <!--//--><![CDATA[//><!--
+  window.addEventListener("DOMContentLoaded", function () {
+    var div = document.createElement('div');
+    var math = document.createElementNS('http://www.w3.org/1998/Math/MathML', 'math');
+    document.body.appendChild(div);
+    div.appendChild(math);
+  // Test for MathML support comparable to WebKit version https://trac.webkit.org/changeset/203640 or higher.
+    div.setAttribute('style', 'font-style: italic');
+    var mathml_unsupported = !(window.getComputedStyle(div.firstChild).getPropertyValue('font-style') === 'normal');
+    div.parentNode.removeChild(div);
+    if (mathml_unsupported) {
+      // MathML does not seem to be supported...
+      var s = document.createElement('script');
+      s.src = "/wiki/MathJax/MathJax.js?config=MML_HTMLorMML-full";
+      document.querySelector('head').appendChild(s);
+    } else {
+      document.head.insertAdjacentHTML("beforeend", '<style>svg[viewBox] {max-width: 100%}</style>');
+    }
+  });
+  //--><!]]>
+</script>
+
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rdf:Description
+    rdf:about="http://golem.ph.utexas.edu/category/2014/12/effective_sample_size.html"
+    trackback:ping="http://golem.ph.utexas.edu/cgi-bin/MT-3.0/dxy-tb.fcgi/2793"
+    dc:title="Effective Sample Size"
+    dc:identifier="http://golem.ph.utexas.edu/category/2014/12/effective_sample_size.html"
+    dc:subject="Statistics"
+    dc:description="Yet another place where the concept of magnitude turns up: the statistical notion of effective sample size."
+    dc:creator="Tom Leinster"
+    dc:date="2014-12-18T22:25:24+00:00" />
+</rdf:RDF>
+-->
+
+
+</head>
+
+<body>
+
+<div class="frame">
+
+<div id="banner">
+<h1><a href="/category/" accesskey="1" title="Jump to the blog main page">The n-Category Caf&#xE9;</a></h1>
+<div class="description">A group blog on math, physics and philosophy</div>
+</div>
+
+
+<h2 class="skip">Skip to the Main Content</h2>
+<div class="skip">
+<a href="#content" accesskey="2">Enough, already! Skip to the content.</a>
+</div>
+<p style="display:none;">
+<strong>Note:</strong>These pages make extensive use of the latest XHTML and CSS <a href="http://www.w3.org">Standards</a>. They ought to look great in any standards-compliant modern browser. Unfortunately, they will probably look horrible in older browsers, like Netscape 4.x and IE 4.x. Moreover, many posts use MathML, which is, currently <em>only</em> supported in Mozilla. My best suggestion (and you will <em>thank</em> me when surfing an ever-increasing number of sites on the web which have been crafted to use the new standards) is to upgrade to the latest version of your browser. If that's not possible, consider moving  to the Standards-compliant and open-source <a href="http://www.mozilla.org">Mozilla</a> browser.
+</p>
+
+
+<div class="blog">
+
+<div><div id='menu'>
+<a href='/category/2014/12/welcome_qiaochu.html' accesskey='p'>&#xab; Welcome, Qiaochu!</a> |
+
+<a href='/category/'>Main</a>
+| <a href='/category/2014/12/competing_foundations.html' accesskey='n'>Competing Foundations? &#xbb;</a>
+
+</div>
+
+<h2 class='date'>December 18, 2014</h2>
+
+<div id='content' class='blogbody'>
+
+<h3 class='title'>Effective Sample Size</h3>
+
+<h4 class='posted'>Posted by Tom Leinster</h4>
+
+<div><a href='http://golem.ph.utexas.edu/~distler/blog/mathml.html' onclick='window.open(this.href, &#x27;MathML&#x27;, &#x27;width=310,height=150,scrollbars=no,resizable=yes,status=no&#x27;); return false;' onkeypress='if(window.event.keyCode == 13){window.open(this.href, &#x27;MathML&#x27;, &#x27;width=310,height=150,scrollbars=no,resizable=yes,status=no&#x27;); return false;}'><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>On a scale of 0 to 10, how much does the average citizen of the Republic of
+Elbonia trust the president?</p>
+
+<p>You&#x2019;re conducting a survey to find out, and you&#x2019;ve calculated that in order
+to get the precision you want, you&#x2019;re going to need a sample of 100
+statistically independent individuals.  Now you have to decide how to do
+this.</p>
+
+<p>You could stand in the central square of the capital city and survey the
+next 100 people who walk by.  But these opinions won&#x2019;t be independent:
+probably politics in the capital isn&#x2019;t representative of politics in
+Elbonia as a whole.</p>
+
+<p>So you consider travelling to 100 different locations in the country and
+asking one Elbonian at each.  But apart from anything else, this is far
+too expensive for you to do.</p>
+
+<p>Maybe a compromise would be OK.  You could go to 10 locations and ask&#x2026; 20
+people at each?  30?  How many would you need in order to match the
+precision of 100 independent individuals &#x2014; to have an &#x201c;effective
+sample size&#x201d; of 100?</p>
+
+<p>The answer turns out to be closely connected to a quantity I&#x2019;ve written
+about many times before:
+<a href='https://golem.ph.utexas.edu/category/2011/01/magnitude_of_metric_spaces_a_r.html'>magnitude</a>.
+Let me explain&#x2026;</p>
+
+
+<div id='more'>
+<div><a href='http://golem.ph.utexas.edu/~distler/blog/mathml.html' onclick='window.open(this.href, &#x27;MathML&#x27;, &#x27;width=310,height=150,scrollbars=no,resizable=yes,status=no&#x27;); return false;' onkeypress='if(window.event.keyCode == 13){window.open(this.href, &#x27;MathML&#x27;, &#x27;width=310,height=150,scrollbars=no,resizable=yes,status=no&#x27;); return false;}'><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>The general situation is that we have a large population of individuals (in
+this case, Elbonians), and with each there is associated a real number
+(in this case, their level of trust in the president).  So we have a probability
+distribution, and we&#x2019;re interested in discovering some statistic <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3b8;</mi></mrow><annotation encoding='application/x-tex'>\theta</annotation></semantics></math>
+(in this case, the mean, but it might instead be the median
+or the variance or the 90th percentile).  We do this by taking some sample
+of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> individuals, and then doing <em>something</em> with the sampled data to
+produce an estimate of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3b8;</mi></mrow><annotation encoding='application/x-tex'>\theta</annotation></semantics></math>.</p>
+
+<p>The &#x201c;something&#x201d; we do with the sampled data is called an <strong>estimator</strong>.
+So, an estimator is a real-valued function on the set of possible sample
+data.  For instance, if you&#x2019;re trying to estimate the mean of the
+population, and we denote the sample data by <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math>, then the
+obvious estimator for the population mean would be just the sample mean,</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x22ef;</mi><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><msub><mi>Y</mi> <mi>n</mi></msub><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\frac{1}{n} Y_1 + \cdots + \frac{1}{n} Y_n.
+</annotation></semantics></math></p>
+
+<p>But it&#x2019;s important to realize that the best estimator for a given statistic
+of the population (such as the mean) needn&#x2019;t be that same statistic applied
+to the sample.  For example, suppose we wish to know the mean mass of 
+men from Mali.  Unfortunately, we&#x2019;ve only weighed three men from Mali, and
+two of them are brothers.  You <em>could</em> use </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mfrac><mn>1</mn><mn>3</mn></mfrac><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msub><mi>Y</mi> <mn>2</mn></msub><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msub><mi>Y</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>
+\frac{1}{3} Y_1 + \frac{1}{3} Y_2 + \frac{1}{3} Y_3
+</annotation></semantics></math></p>
+
+<p>as your estimator, but since body mass is somewhat genetic, that would give
+undue importance to one particular family.  At the opposite extreme, you
+could use</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><msub><mi>Y</mi> <mn>2</mn></msub><mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><msub><mi>Y</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>
+\frac{1}{2} Y_1 + \frac{1}{4} Y_2 + \frac{1}{4} Y_3
+</annotation></semantics></math></p>
+
+<p>(where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub></mrow><annotation encoding='application/x-tex'>Y_1</annotation></semantics></math> is the mass of the non-brother).  But that would be going too
+far, as it gives the non-brother as much importance as the two brothers put
+together.  Probably the best answer is somewhere in between.  Exactly
+<em>where</em> in between depends on the correlation between masses of brothers,
+which is a quantity we might reasonably estimate from data gathered elsewhere
+in the world.</p>
+
+<p>(There&#x2019;s a deliberate echo here of something I wrote
+<a href='https://golem.ph.utexas.edu/category/2008/11/entropy_diversity_and_cardinal_1.html'>previously</a>:
+in what proportions should we sow
+poppies, Polish wheat and Persian wheat in order to maximize
+biological diversity?  The similarity is no coincidence.)</p>
+
+<p>There are several qualities we might seek in an estimator.  I&#x2019;ll focus on
+two. </p>
+
+<ul>
+<li><p><em>High precision</em> &#xa0; The <strong>precision</strong> of an estimator is the
+reciprocal of its variance.  To make sense of this, you have to realize
+that estimators are random variables too!  An estimator with high
+precision, or low variance, is not much changed by the effects of
+randomness.  It will give more or less the same answer if you run it
+multiple times.  </p>
+
+<p>For instance, suppose we&#x2019;ve decided to do the Elbonian survey by asking
+30 people in each of the 5 biggest cities and 20 people from each of 3
+chosen villages, then taking some specific weighted mean of the resulting
+data.  If that&#x2019;s a high-precision estimator, it will give more or
+less the same final answer no matter which specific Elbonians happen to
+have been stopped by the pollsters.</p></li>
+<li><p><em>Unbiased</em> &#xa0; An estimator of some statistic is <strong>unbiased</strong> if its expected value is
+equal to that statistic for the population.  </p>
+
+<p>For example, suppose we&#x2019;re trying to estimate the variance of some
+distribution.  If our sample consists of a measly two individuals, then the
+variance of the sample is likely to be much less than the variance of the
+population.  After all, with only two individuals observed, we&#x2019;ve barely
+begun to glimpse the full variation of the population as a whole.  It can
+actually be <a href='https://en.wikipedia.org/wiki/Bessel%27s_correction'>shown</a>
+that with a sample size of two, the expected value of the sample variance
+is half the population variance.  So the sample variance is a biased
+estimator of the population variance, but twice the sample variance is an
+unbiased estimator.</p>
+
+<p>(Being unbiased is perhaps a less crucial property of an estimator than
+it might at first appear.  Suppose the boss of a chain of pizza takeaways
+wants to know the average size of pizzas ordered.  &#x201c;Size&#x201d; could be measured
+by diameter &#x2014; what you order by &#x2014; or area &#x2014; what you eat.
+But since the relationship between diameter and area is quadratic rather
+than linear, an unbiased estimator of one will be a biased estimator of the
+other.)</p></li>
+</ul>
+
+<p>No matter what statistic you&#x2019;re trying to estimate, you can <a href='https://books.google.co.uk/books?id=Rhp1AwAAQBAJ&amp;pg=PA220&amp;lpg=PA220'>talk
+about</a>
+the &#x201c;effective sample size&#x201d; of an estimator.  But for simplicity, I&#x2019;ll only
+talk about estimating the mean.  </p>
+
+<p>Here&#x2019;s a loose definition:</p>
+
+<blockquote>
+  <p>The <em>effective sample size</em> of an estimator of the population mean is
+the number <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_{eff}</annotation></semantics></math> with the property that our estimator has the same
+precision (or variance) as the estimator got by sampling <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_{eff}</annotation></semantics></math>
+independent individuals.</p>
+</blockquote>
+
+<p>Let&#x2019;s unpack that.</p>
+
+<p>Suppose we choose <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> individuals at random from the population (with
+replacement, if you care).  So we have independent, identically distributed
+random variables <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math>.  As above, we take the sample mean</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x22ef;</mi><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>
+\frac{1}{n} Y_1 + \cdots + \frac{1}{n} Y_n
+</annotation></semantics></math></p>
+
+<p>as our estimator of the population mean.  Since variance is additive for
+<em>independent</em> random variables, the variance of this estimator is </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>n</mi><mo>&#x22c5;</mo><mi>Var</mi><mo maxsize='1.8em' minsize='1.8em'>(</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><msub><mi>Y</mi> <mn>1</mn></msub><mo maxsize='1.8em' minsize='1.8em'>)</mo><mo>=</mo><mi>n</mi><mo>&#x22c5;</mo><mfrac><mn>1</mn><mrow><msup><mi>n</mi> <mn>2</mn></msup></mrow></mfrac><mi>Var</mi><mo stretchy='false'>(</mo><msub><mi>Y</mi> <mn>1</mn></msub><mo stretchy='false'>)</mo><mo>=</mo><mfrac><mrow><msup><mi>&#x3c3;</mi> <mn>2</mn></msup></mrow><mi>n</mi></mfrac></mrow><annotation encoding='application/x-tex'>
+n \cdot Var\Bigl( \frac{1}{n} Y_1 \Bigr)
+=
+n \cdot \frac{1}{n^2} Var(Y_1)
+=
+\frac{\sigma^2}{n}
+</annotation></semantics></math></p>
+
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mi>&#x3c3;</mi> <mn>2</mn></msup></mrow><annotation encoding='application/x-tex'>\sigma^2</annotation></semantics></math> is the population variance.  The precision of the
+estimator is, therefore, <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi><mo stretchy='false'>/</mo><msup><mi>&#x3c3;</mi> <mn>2</mn></msup></mrow><annotation encoding='application/x-tex'>n/\sigma^2</annotation></semantics></math>.  That makes sense: as your sample
+size <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> increases, the precision of your estimate increases too.</p>
+
+<p>Now, suppose we have some other estimator <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mover><mi>&#x3bc;</mi><mo stretchy='false'>^</mo></mover></mrow><annotation encoding='application/x-tex'>\hat{\mu}</annotation></semantics></math> of the population
+mean.  It&#x2019;s a random variable, so it has a variance <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Var</mi><mo stretchy='false'>(</mo><mover><mi>&#x3bc;</mi><mo stretchy='false'>^</mo></mover><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Var(\hat{\mu})</annotation></semantics></math>.  The
+effective sample size of the estimator <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mover><mi>&#x3bc;</mi><mo stretchy='false'>^</mo></mover></mrow><annotation encoding='application/x-tex'>\hat{\mu}</annotation></semantics></math> is the number <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_{eff}</annotation></semantics></math>
+satisfying</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msup><mi>&#x3c3;</mi> <mn>2</mn></msup><mo stretchy='false'>/</mo><msub><mi>n</mi> <mi>eff</mi></msub><mo>=</mo><mi>Var</mi><mo stretchy='false'>(</mo><mover><mi>&#x3bc;</mi><mo stretchy='false'>^</mo></mover><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\sigma^2/n_{eff} = Var(\hat{\mu}).
+</annotation></semantics></math></p>
+
+<p>This doesn&#x2019;t entirely make sense, as the unique number <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_{eff}</annotation></semantics></math> satisfying
+this equation needn&#x2019;t be an integer, so we can&#x2019;t sensibly talk about a
+sample of size <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_{eff}</annotation></semantics></math>.  Nevertheless, we can absolutely rigorously
+define the <strong>effective sample size</strong> of our estimator <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mover><mi>&#x3bc;</mi><mo stretchy='false'>^</mo></mover></mrow><annotation encoding='application/x-tex'>\hat{\mu}</annotation></semantics></math> as</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>n</mi> <mi>eff</mi></msub><mo>=</mo><msup><mi>&#x3c3;</mi> <mn>2</mn></msup><mo stretchy='false'>/</mo><mo lspace='0em' rspace='thinmathspace'>Var</mo><mo stretchy='false'>(</mo><mover><mi>&#x3bc;</mi><mo stretchy='false'>^</mo></mover><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+n_{eff} = \sigma^2/\Var(\hat{\mu}).
+</annotation></semantics></math></p>
+
+<p>And that&#x2019;s the definition.  Differently put, </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mtext>effective sample size</mtext><mo>=</mo><mtext>precision </mtext><mo>&#xd7;</mo><mtext>population variance</mtext><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\text{effective sample size}
+=
+\text{precision }
+\times
+\text{population variance}.
+</annotation></semantics></math></p>
+
+<blockquote>
+  <p><strong>Trivial examples</strong> &#xa0; If <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mover><mi>&#x3bc;</mi><mo stretchy='false'>^</mo></mover></mrow><annotation encoding='application/x-tex'>\hat{\mu}</annotation></semantics></math> is the mean value of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>
+uncorrelated individuals, then the effective sample size is <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>.  If
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mover><mi>&#x3bc;</mi><mo stretchy='false'>^</mo></mover></mrow><annotation encoding='application/x-tex'>\hat{\mu}</annotation></semantics></math> is the mean value of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> extremely highly correlated
+individuals, then the variance of the estimator is little less than the
+variance of a single individual, so the effective sample size is little
+more than <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>.</p>
+</blockquote>
+
+<p>Now, suppose our pollsters have come back from their trips to various parts
+of Elbonia.  Together, they&#x2019;ve asked <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> individuals how much they trust the
+president.  We want to take that data and use it to estimate the population
+mean &#x2014; that is, the mean level of trust in the president across
+Elbonia &#x2014; in as precise a way as possible.</p>
+
+<p>We&#x2019;re going to restrict ourselves to unbiased estimators, so that the
+expected value of the estimator is the population mean.  We&#x2019;re also going
+to consider only <strong>linear estimators</strong>: those of the form</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>a</mi> <mn>1</mn></msub><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x22ef;</mi><mo>+</mo><msub><mi>a</mi> <mi>n</mi></msub><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>
+a_1 Y_1 + \cdots + a_n Y_n
+</annotation></semantics></math></p>
+
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math> are the trust levels expressed by the <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>
+Elbonians surveyed.</p>
+
+<p>Question: </p>
+
+<blockquote>
+  <p><em>What choice of unbiased linear estimator maximizes the effective sample
+size?</em> </p>
+</blockquote>
+
+<p>To answer this, we need to recall some basic statistical notions&#x2026;</p>
+
+<h3>Correlation and covariance</h3>
+
+<p>Variance is a quadratic form, and covariance is the corresponding bilinear
+form.  That is, take two random variables <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math>, with respective
+means <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3bc;</mi> <mi>X</mi></msub></mrow><annotation encoding='application/x-tex'>\mu_X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3bc;</mi> <mi>Y</mi></msub></mrow><annotation encoding='application/x-tex'>\mu_Y</annotation></semantics></math>.  Then their <strong>covariance</strong> is</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>Cov</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>E</mi><mo stretchy='false'>(</mo><mo stretchy='false'>(</mo><mi>X</mi><mo>&#x2212;</mo><msub><mi>&#x3bc;</mi> <mi>X</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>(</mo><mi>Y</mi><mo>&#x2212;</mo><msub><mi>&#x3bc;</mi> <mi>Y</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+Cov(X, Y) = E((X - \mu_X)(Y - \mu_Y)).
+</annotation></semantics></math></p>
+
+<p>This is bilinear in <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math>, and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Cov</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>X</mi><mo stretchy='false'>)</mo><mo>=</mo><mi>Var</mi><mo stretchy='false'>(</mo><mi>X</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Cov(X, X) = Var(X)</annotation></semantics></math>.  </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Cov</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Cov(X, Y)</annotation></semantics></math> is bounded above and below by <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo>&#xb1;</mo><msub><mi>&#x3c3;</mi> <mi>X</mi></msub><msub><mi>&#x3c3;</mi> <mi>Y</mi></msub></mrow><annotation encoding='application/x-tex'>\pm \sigma_X \sigma_Y</annotation></semantics></math>, the
+product of the standard deviations.  It&#x2019;s natural to normalize, dividing
+through by <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3c3;</mi> <mi>X</mi></msub><msub><mi>&#x3c3;</mi> <mi>Y</mi></msub></mrow><annotation encoding='application/x-tex'>\sigma_X \sigma_Y</annotation></semantics></math> to obtain a number between <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>-1</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>.
+This gives the <strong>correlation coefficient</strong></p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>&#x3c1;</mi> <mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo>=</mo><mfrac><mrow><mi>Cov</mi><mo stretchy='false'>(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy='false'>)</mo></mrow><mrow><msub><mi>&#x3c3;</mi> <mi>X</mi></msub><msub><mi>&#x3c3;</mi> <mi>Y</mi></msub></mrow></mfrac><mo>&#x2208;</mo><mo stretchy='false'>[</mo><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>]</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\rho_{X, Y} 
+= 
+\frac{Cov(X, Y)}{\sigma_X\sigma_Y} 
+\in 
+[-1, 1].
+</annotation></semantics></math></p>
+
+<p>Alternatively, we can first scale <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> to have variance <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>, then
+take the covariance, and this also gives the correlation:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>&#x3c1;</mi> <mrow><mi>X</mi><mo>,</mo><mi>Y</mi></mrow></msub><mo>=</mo><mi>Cov</mi><mo stretchy='false'>(</mo><mi>X</mi><mo stretchy='false'>/</mo><msub><mi>&#x3c3;</mi> <mi>X</mi></msub><mo>,</mo><mi>Y</mi><mo stretchy='false'>/</mo><msub><mi>&#x3c3;</mi> <mi>Y</mi></msub><mo stretchy='false'>)</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\rho_{X, Y} = Cov(X/\sigma_X, Y/\sigma_Y).
+</annotation></semantics></math></p>
+
+<p>Now suppose we have <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> random variables, <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math>.  The
+<strong>correlation matrix</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> is the <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi><mo>&#xd7;</mo><mi>n</mi></mrow><annotation encoding='application/x-tex'>n \times n</annotation></semantics></math> matrix whose <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>(</mo><mi>i</mi><mo>,</mo><mi>j</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(i, j)</annotation></semantics></math>-entry
+is <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3c1;</mi> <mrow><msub><mi>Y</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>Y</mi> <mi>j</mi></msub></mrow></msub></mrow><annotation encoding='application/x-tex'>\rho_{Y_i, Y_j}</annotation></semantics></math>.  Correlation matrices have some easily-proved properties:</p>
+
+<ul>
+<li><p>The entries are all in <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>[</mo><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>[-1, 1]</annotation></semantics></math>.</p></li>
+<li><p>The diagonal entries are all <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>.</p></li>
+<li><p>The matrix is symmetric.</p></li>
+<li><p>The matrix is positive semidefinite.  That&#x2019;s because the corresponding
+quadratic form is <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>(</mo><msub><mi>a</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>a</mi> <mi>n</mi></msub><mo stretchy='false'>)</mo><mo>&#x21a6;</mo><mi>Var</mi><mo stretchy='false'>(</mo><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>Y</mi> <mi>i</mi></msub><mo stretchy='false'>/</mo><msub><mi>&#x3c3;</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(a_1, \ldots, a_n) \mapsto Var(\sum a_i
+Y_i/\sigma_i)</annotation></semantics></math>, and variances are nonnegative.</p></li>
+</ul>
+
+<p>And actually, it&#x2019;s not so hard to prove that <em>any</em> matrix with these
+properties is the correlation matrix of some sequence of random variables.</p>
+
+<p>In what follows, for simplicity, I&#x2019;ll quietly assume that the correlation
+matrices we encounter are <em>strictly</em> positive definite.  This only amounts to
+assuming that no linear combination of the <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>Y_i</annotation></semantics></math>s has variance zero &#x2014;
+in other words, that there are no <em>exact</em> linear relationships between the
+random variables involved.</p>
+
+<h3>Back to the main question</h3>
+
+<p>Here&#x2019;s where we got to.  We surveyed <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> individuals from our population,
+giving <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> identically distributed <em>but not necessarily independent</em> random
+variables <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math>.  Some of them will be correlated because of
+geographical clustering.  </p>
+
+<p>We&#x2019;re trying to use this data to estimate the population mean in as precise
+a way as possible.  Specifically, we&#x2019;re looking for numbers <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>a</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>a</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>a_1, \ldots,
+a_n</annotation></semantics></math> such that the linear estimator <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>Y</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>\sum a_i Y_i</annotation></semantics></math> is unbiased and has the
+maximum possible effective sample size.</p>
+
+<p>The effective sample size was defined as <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi>eff</mi></msub><mo>=</mo><msup><mi>&#x3c3;</mi> <mn>2</mn></msup><mo stretchy='false'>/</mo><mi>Var</mi><mo stretchy='false'>(</mo><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>Y</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>n_{eff} = \sigma^2/Var(\sum a_i
+Y_i)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mi>&#x3c3;</mi> <mn>2</mn></msup></mrow><annotation encoding='application/x-tex'>\sigma^2</annotation></semantics></math> is the variance of the distribution we&#x2019;re drawing
+from.  Now we need to work out the variance in the denominator.</p>
+
+<p>Let <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> denote the correlation matrix of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math>.  I said a
+moment ago that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>(</mo><msub><mi>a</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>a</mi> <mi>n</mi></msub><mo stretchy='false'>)</mo><mo>&#x21a6;</mo><mi>Var</mi><mo stretchy='false'>(</mo><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo><msub><mi>a</mi> <mi>i</mi></msub><msub><mi>Y</mi> <mi>i</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(a_1, \ldots, a_n) \mapsto Var (\sum a_i Y_i)</annotation></semantics></math> is the
+quadratic form corresponding to the bilinear form represented by the
+covariance matrix.  Since each <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>Y_i</annotation></semantics></math> has variance <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mi>&#x3c3;</mi> <mn>2</mn></msup></mrow><annotation encoding='application/x-tex'>\sigma^2</annotation></semantics></math>, the
+covariance matrix is just <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mi>&#x3c3;</mi> <mn>2</mn></msup></mrow><annotation encoding='application/x-tex'>\sigma^2</annotation></semantics></math> times the correlation matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math>.  Hence</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>Var</mi><mo stretchy='false'>(</mo><msub><mi>a</mi> <mn>1</mn></msub><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x22ef;</mi><mo>+</mo><msub><mi>a</mi> <mi>n</mi></msub><msub><mi>Y</mi> <mi>n</mi></msub><mo stretchy='false'>)</mo><mo>=</mo><msup><mi>&#x3c3;</mi> <mn>2</mn></msup><mo>&#x22c5;</mo><msup><mi>a</mi> <mo>*</mo></msup><mi>R</mi><mi>a</mi></mrow><annotation encoding='application/x-tex'>
+Var(a_1 Y_1 + \cdots + a_n Y_n) 
+=
+\sigma^2 \cdot a^\ast R a
+</annotation></semantics></math></p>
+
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo>*</mo></mrow><annotation encoding='application/x-tex'>\ast</annotation></semantics></math> denotes a transpose and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>a</mi><mo>=</mo><mo stretchy='false'>(</mo><msub><mi>a</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>a</mi> <mi>n</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>a = (a_1, \ldots, a_n)</annotation></semantics></math>.  </p>
+
+<p>So, the effective sample size of our estimator is</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mn>1</mn><mo stretchy='false'>/</mo><msup><mi>a</mi> <mo>*</mo></msup><mi>R</mi><mi>a</mi><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+1/a^\ast R a.
+</annotation></semantics></math></p>
+
+<p>We also wanted our estimator to be unbiased.  Its expected value is</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>E</mi><mo stretchy='false'>(</mo><msub><mi>a</mi> <mn>1</mn></msub><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x22ef;</mi><mo>+</mo><msub><mi>a</mi> <mi>n</mi></msub><msub><mi>Y</mi> <mi>n</mi></msub><mo stretchy='false'>)</mo><mo>=</mo><mo stretchy='false'>(</mo><msub><mi>a</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x22ef;</mi><mo>+</mo><msub><mi>a</mi> <mi>n</mi></msub><mo stretchy='false'>)</mo><mi>&#x3bc;</mi></mrow><annotation encoding='application/x-tex'>
+E(a_1 Y_1 + \cdots + a_n Y_n) = (a_1 + \cdots + a_n) \mu
+</annotation></semantics></math></p>
+
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3bc;</mi></mrow><annotation encoding='application/x-tex'>\mu</annotation></semantics></math> is the population mean.  So, we need <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo><msub><mi>a</mi> <mi>i</mi></msub><mo>=</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>\sum a_i = 1</annotation></semantics></math>.  </p>
+
+<p>Putting this together, the maximum possible effective sample size among all
+unbiased linear estimators is</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>sup</mi><mo maxsize='1.8em' minsize='1.8em'>{</mo><mfrac><mn>1</mn><mrow><msup><mi>a</mi> <mo>*</mo></msup><mi>R</mi><mi>a</mi></mrow></mfrac><mspace width='thinmathspace' /><mo>:</mo><mspace width='thinmathspace' /><mi>a</mi><mo>&#x2208;</mo><msup><mi>&#x211d;</mi> <mi>n</mi></msup><mo>,</mo><mspace width='thinmathspace' /><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo><msub><mi>a</mi> <mi>i</mi></msub><mo>=</mo><mn>1</mn><mo maxsize='1.8em' minsize='1.8em'>}</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\sup \Bigl\{ \frac{1}{a^\ast R a} \, : \, 
+a \in \mathbb{R}^n, \, \sum a_i = 1 \Bigr\}.
+</annotation></semantics></math></p>
+
+<p>Which <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>a</mi><mo>&#x2208;</mo><msup><mi>&#x211d;</mi> <mi>n</mi></msup></mrow><annotation encoding='application/x-tex'>a \in \mathbb{R}^n</annotation></semantics></math> achieves this maximum, and what <em>is</em> the maximum
+possible effective sample size?  That&#x2019;s easy, and in fact it&#x2019;s something
+that&#x2019;s appeared many times at this blog before&#x2026;</p>
+
+<h3>The magnitude of a matrix</h3>
+
+<p>The <strong>magnitude</strong> <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo></mrow><annotation encoding='application/x-tex'>|R|</annotation></semantics></math> of an invertible <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi><mo>&#xd7;</mo><mi>n</mi></mrow><annotation encoding='application/x-tex'>n \times n</annotation></semantics></math> matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> is the sum of
+all <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mi>n</mi> <mn>2</mn></msup></mrow><annotation encoding='application/x-tex'>n^2</annotation></semantics></math> entries of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mi>R</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn></mrow></msup></mrow><annotation encoding='application/x-tex'>R^{-1}</annotation></semantics></math>.  To calculate it, you don&#x2019;t need to go as
+far as inverting <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math>.  It&#x2019;s much easier to find the unique column vector
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>w</mi></mrow><annotation encoding='application/x-tex'>w</annotation></semantics></math> satisfying </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>R</mi><mi>w</mi><mo>=</mo><mrow><mo>(</mo><mrow><mtable displaystyle='false' rowspacing='0.5ex'><mtr><mtd><mn>1</mn></mtd></mtr> <mtr><mtd><mi>&#x22ee;</mi></mtd></mtr> <mtr><mtd><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding='application/x-tex'>
+R w = \begin{pmatrix} 1 \\ \vdots \\ 1 \end{pmatrix}
+</annotation></semantics></math></p>
+
+<p>(the <strong>weighting</strong> of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math>), then calculate <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo> <mi>i</mi></msub><msub><mi>w</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>\sum_i w_i</annotation></semantics></math>.  This sum is the
+magnitude of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math>, since <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>w</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>w_i</annotation></semantics></math> is the <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>i</mi></mrow><annotation encoding='application/x-tex'>i</annotation></semantics></math>th row-sum of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mi>R</mi> <mrow><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn></mrow></msup></mrow><annotation encoding='application/x-tex'>R^{-1}</annotation></semantics></math>.</p>
+
+<p>Most of <a href='https://golem.ph.utexas.edu/category/2011/01/magnitude_of_metric_spaces_a_r.html'>what I&#x2019;ve written about
+magnitude</a>
+has been in the situation where we start with a finite metric space <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi><mo>=</mo><mo stretchy='false'>{</mo><msub><mi>x</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>x</mi> <mi>n</mi></msub><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>X =
+\{x_1, \ldots, x_n\}</annotation></semantics></math>, and we use the matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Z</mi></mrow><annotation encoding='application/x-tex'>Z</annotation></semantics></math> with entries <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Z</mi> <mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mi>exp</mi><mo stretchy='false'>(</mo><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mi>d</mi><mo stretchy='false'>(</mo><msub><mi>x</mi> <mi>i</mi></msub><mo>,</mo><msub><mi>x</mi> <mi>j</mi></msub><mo stretchy='false'>)</mo><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>Z_{i j} =
+exp(-d(x_i, x_j))</annotation></semantics></math>.  This turns out to give interesting information about
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math>.  In the metric situation, the entries of the matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Z</mi></mrow><annotation encoding='application/x-tex'>Z</annotation></semantics></math> are between
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>.  Often <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Z</mi></mrow><annotation encoding='application/x-tex'>Z</annotation></semantics></math> is positive definite (e.g. when <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi><mo>&#x2282;</mo><msup><mi>&#x211d;</mi> <mi>n</mi></msup></mrow><annotation encoding='application/x-tex'>X
+\subset \mathbb{R}^n</annotation></semantics></math>), as correlation matrices are.</p>
+
+<p>When <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> is positive definite, there&#x2019;s a third way to describe the
+magnitude:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo><mo>=</mo><mi>sup</mi><mo maxsize='1.8em' minsize='1.8em'>{</mo><mfrac><mn>1</mn><mrow><msup><mi>a</mi> <mo>*</mo></msup><mi>R</mi><mi>a</mi></mrow></mfrac><mspace width='thinmathspace' /><mo>:</mo><mspace width='thinmathspace' /><mi>a</mi><mo>&#x2208;</mo><msup><mi>&#x211d;</mi> <mi>n</mi></msup><mo>,</mo><mspace width='thinmathspace' /><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo><msub><mi>a</mi> <mi>i</mi></msub><mo>=</mo><mn>1</mn><mo maxsize='1.8em' minsize='1.8em'>}</mo><mo>.</mo></mrow><annotation encoding='application/x-tex'> 
+|R| 
+=
+\sup \Bigl\{ \frac{1}{a^\ast R a} \, : \, 
+a \in \mathbb{R}^n, \, \sum a_i = 1 \Bigr\}.
+</annotation></semantics></math></p>
+
+<p>The supremum is attained just when <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>a</mi><mo>=</mo><mi>w</mi><mo stretchy='false'>/</mo><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo></mrow><annotation encoding='application/x-tex'>a = w/|R|</annotation></semantics></math>, and the proof is a simple
+application of the Cauchy&#x2013;Schwarz inequality.</p>
+
+<p>But that supremum is exactly the expression we had for maximum effective sample size!  So:</p>
+
+<blockquote>
+  <p><em>The maximum possible value of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_{eff}</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo></mrow><annotation encoding='application/x-tex'>|R|</annotation></semantics></math>.</em></p>
+</blockquote>
+
+<p>Or more wordily:</p>
+
+<blockquote>
+  <p><em>The maximum effective sample size of an unbiased linear estimator of the
+mean is the magnitude of the sample correlation matrix.</em></p>
+</blockquote>
+
+<p>Or wordily but approximately:</p>
+
+<blockquote>
+  <p><em>Effective sample size <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo>=</mo></mrow><annotation encoding='application/x-tex'>=</annotation></semantics></math> magnitude of correlation matrix</em>.</p>
+</blockquote>
+
+<p>Moreover, we know how to attain that maximum.  It&#x2019;s attained if and only if
+our estimator is</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mfrac><mn>1</mn><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo></mrow></mfrac><mo stretchy='false'>(</mo><msub><mi>w</mi> <mn>1</mn></msub><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x22ef;</mi><mo>+</mo><msub><mi>w</mi> <mi>n</mi></msub><msub><mi>Y</mi> <mi>n</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>
+\frac{1}{|R|} (w_1 Y_1 + \cdots + w_n Y_n)
+</annotation></semantics></math></p>
+
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>w</mi><mo>=</mo><mo stretchy='false'>(</mo><msub><mi>w</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>w</mi> <mi>n</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>w = (w_1, \ldots, w_n)</annotation></semantics></math> is the weighting of the correlation matrix.</p>
+
+<p>I&#x2019;m not too sure where this &#x201c;result&#x201d; &#x2014; observation, really &#x2014;
+comes from.  I learned it from the statistician <a href='http://paul-blackwell.staff.shef.ac.uk/'>Paul
+Blackwell</a> at Sheffield, who, like
+me, had been reading this paper:</p>
+
+<blockquote>
+  <p>Andrew Solow and Stephen Polasky, Measuring biological diversity.
+<em>Environmental and Ecological Statistics</em> 1 (1994), 95&#x2013;103.  </p>
+</blockquote>
+
+<p>In turn, Solow and Polasky refer to this:</p>
+
+<blockquote>
+  <p>Morris Eaton, A group action on covariances with applications to the
+comparison of linear normal experiments.  In: Moshe Shaked and Y.L. Tong
+(eds.), <em>Stochastic inequalities: Papers from the AMS-IMS-SIAM Joint Summer
+Research Conference held in Seattle, Washington, July 1991</em>, Institute of
+Mathematical Statistics Lecture Notes &#x2014; Monograph Series, Volume 22,
+1992.</p>
+</blockquote>
+
+<p>But the result is so simple that I&#x2019;d imagine it&#x2019;s much older.  I&#x2019;ve been
+wondering whether it&#x2019;s essentially the <a href='https://en.wikipedia.org/wiki/Gauss%E2%80%93Markov_theorem'>Gauss-Markov
+theorem</a>; I
+thought it was, then I thought it wasn&#x2019;t.  Does anyone know?</p>
+
+<h3>The surprising behaviour of effective sample size</h3>
+
+<p>You might expect the effective size of a sample of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> individuals to be at
+most <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>.  It&#x2019;s not.  </p>
+
+<p>You might expect the effective sample size to go down as the correlations
+within the sample go up.  It doesn&#x2019;t.</p>
+
+<p>This behaviour appears in even the simplest nontrivial example: </p>
+
+<blockquote>
+  <p><strong>Example</strong> &#xa0; Suppose our sample consists of just two individuals.
+Call the sampled values <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub></mrow><annotation encoding='application/x-tex'>Y_1</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>Y_2</annotation></semantics></math>, and write the correlation matrix
+as 
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>R</mi><mo>=</mo><mrow><mo>(</mo><mrow><mtable displaystyle='false' rowspacing='0.5ex'><mtr><mtd><mn>1</mn></mtd> <mtd><mi>&#x3c1;</mi></mtd></mtr> <mtr><mtd><mi>&#x3c1;</mi></mtd> <mtd><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+R =
+\begin{pmatrix}
+1 &amp; \rho \\
+\rho &amp; 1
+\end{pmatrix}.
+</annotation></semantics></math>
+Then the maximum-precision unbiased linear estimator is <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy='false'>(</mo><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>Y</mi> <mn>2</mn></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\frac{1}{2}(Y_1 +
+Y_2)</annotation></semantics></math>, and its effective sample size is
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo><mo>=</mo><mfrac><mn>2</mn><mrow><mn>1</mn><mo>+</mo><mi>&#x3c1;</mi></mrow></mfrac><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+|R| = \frac{2}{1 + \rho}.
+</annotation></semantics></math>
+As the correlation <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math> between the two variables increases from <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math> to
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>, the effective sample size decreases from <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>2</mn></mrow><annotation encoding='application/x-tex'>2</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>, as you&#x2019;d expect.</p>
+
+<p>But when <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>\rho \lt 0</annotation></semantics></math>, the effective sample size is <em>greater</em> than 2.  In
+fact, as <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi><mo>&#x2192;</mo><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>\rho \to -1</annotation></semantics></math>, the effective sample size tends to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>&#x221e;</mn></mrow><annotation encoding='application/x-tex'>\infty</annotation></semantics></math>.
+That&#x2019;s intuitively plausible.  For if <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math> is close to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>-1</annotation></semantics></math> then, writing
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><msub><mi>&#x3b5;</mi> <mn>1</mn></msub></mrow><annotation encoding='application/x-tex'>Y_1 = \mu + \varepsilon_1</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>2</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><msub><mi>&#x3b5;</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>Y_2 = \mu + \varepsilon_2</annotation></semantics></math>, we have <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3b5;</mi> <mn>1</mn></msub><mo>&#x2248;</mo><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><msub><mi>&#x3b5;</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>\varepsilon_1
+\approx -\varepsilon_2</annotation></semantics></math>, and so <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy='false'>(</mo><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>Y</mi> <mn>2</mn></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\frac{1}{2}(Y_1 + Y_2)</annotation></semantics></math> is a very good estimator
+of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3bc;</mi></mrow><annotation encoding='application/x-tex'>\mu</annotation></semantics></math>.  In the extreme, when <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi><mo>=</mo><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>\rho = -1</annotation></semantics></math>, it&#x2019;s an <em>exact</em> estimator of
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3bc;</mi></mrow><annotation encoding='application/x-tex'>\mu</annotation></semantics></math> &#x2014; it&#x2019;s infinitely precise.</p>
+</blockquote>
+
+<p>The fact that the effective sample size can be greater than the actual
+sample size seems to be very well known.  For instance, there&#x2019;s a whole
+<a href='http://wiki.q-researchsoftware.com/wiki/Effective_Sample_Size_Greater_Than_100%25'>page about
+it</a>
+in the documentation for Q, which is apparently &#x201c;analysis software for
+market research&#x201d;.  </p>
+
+<p>What&#x2019;s interesting is that this doesn&#x2019;t only occur when
+some of the variables are negatively correlated.  It can also happen when
+all the correlations are nonnegative, as in the following example from the
+paper by Eaton cited above.</p>
+
+<blockquote>
+  <p><strong>Example</strong> Consider the correlation matrix
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>R</mi><mo>=</mo><mrow><mo>(</mo><mrow><mtable displaystyle='false' rowspacing='0.5ex'><mtr><mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mi>&#x3c1;</mi></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mi>&#x3c1;</mi></mtd></mtr> <mtr><mtd><mi>&#x3c1;</mi></mtd> <mtd><mi>&#x3c1;</mi></mtd> <mtd><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding='application/x-tex'>
+R =
+\begin{pmatrix}
+1 &amp;0 &amp;\rho \\
+0 &amp;1 &amp;\rho \\
+\rho &amp;\rho &amp;1
+\end{pmatrix}
+</annotation></semantics></math>
+where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0</mn><mo>&#x2264;</mo><mi>&#x3c1;</mi><mo>&lt;</mo><msqrt><mn>2</mn></msqrt><mo stretchy='false'>/</mo><mn>2</mn><mo>=</mo><mn>0.707</mn><mi>&#x2026;</mi></mrow><annotation encoding='application/x-tex'>0 \leq \rho \lt \sqrt{2}/2 = 0.707\ldots</annotation></semantics></math>.  This is positive
+definite, so it&#x2019;s the correlation matrix of some random variables <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>Y</mi> <mn>2</mn></msub><mo>,</mo><msub><mi>Y</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>Y_1,
+Y_2, Y_3</annotation></semantics></math>.   </p>
+
+<p>A routine computation shows that 
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo><mo>=</mo><mfrac><mrow><mn>3</mn><mo>&#x2212;</mo><mn>4</mn><mi>&#x3c1;</mi></mrow><mrow><mn>1</mn><mo>&#x2212;</mo><mn>2</mn><msup><mi>&#x3c1;</mi> <mn>2</mn></msup></mrow></mfrac><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+|R| = \frac{3 - 4\rho}{1 - 2\rho^2}.
+</annotation></semantics></math>
+As we&#x2019;ve shown, this is the greatest possible effective sample size you can achieve by taking an unbiased linear combination of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub></mrow><annotation encoding='application/x-tex'>Y_1</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>Y_2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>Y_3</annotation></semantics></math>.</p>
+
+<p>When <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>\rho = 0</annotation></semantics></math>, it&#x2019;s <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>3</mn></mrow><annotation encoding='application/x-tex'>3</annotation></semantics></math>, as you&#x2019;d
+expect: the variables are uncorrelated.  As <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math> increases, <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo></mrow><annotation encoding='application/x-tex'>|R|</annotation></semantics></math>
+decreases, again as you&#x2019;d expect: more correlation between the variables
+leads to a smaller effective sample size.  This behaviour continues until
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi><mo>=</mo><mn>1</mn><mo stretchy='false'>/</mo><mn>2</mn></mrow><annotation encoding='application/x-tex'>\rho = 1/2</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo><mo>=</mo><mn>2</mn></mrow><annotation encoding='application/x-tex'>|R| = 2</annotation></semantics></math>.  </p>
+
+<p>But then something strange happens.  As <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math> increases from <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn><mo stretchy='false'>/</mo><mn>2</mn></mrow><annotation encoding='application/x-tex'>1/2</annotation></semantics></math> to
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msqrt><mn>2</mn></msqrt><mo stretchy='false'>/</mo><mn>2</mn></mrow><annotation encoding='application/x-tex'>\sqrt{2}/2</annotation></semantics></math>, the effective sample size increases from <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>2</mn></mrow><annotation encoding='application/x-tex'>2</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>&#x221e;</mn></mrow><annotation encoding='application/x-tex'>\infty</annotation></semantics></math>.
+<em>Increasing the correlation increases the effective sample size.</em>  For
+instance, when <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi><mo>=</mo><mn>0.7</mn></mrow><annotation encoding='application/x-tex'>\rho = 0.7</annotation></semantics></math>, we have <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo><mo>=</mo><mn>10</mn></mrow><annotation encoding='application/x-tex'>|R| = 10</annotation></semantics></math>: the
+maximum-precision estimator is as precise as if we&#x2019;d chosen <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>10</mn></mrow><annotation encoding='application/x-tex'>10</annotation></semantics></math>
+independent individuals!  For that value of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math>, the maximum-precision
+estimator turns out to be 
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mfrac><mn>3</mn><mn>2</mn></mfrac><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><msub><mi>Y</mi> <mn>2</mn></msub><mo>&#x2212;</mo><mn>2</mn><msub><mi>Y</mi> <mn>3</mn></msub><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\frac{3}{2} Y_1 + \frac{3}{2} Y_2 - 2 Y_3.
+</annotation></semantics></math>
+Go figure!</p>
+</blockquote>
+
+<p>This is very like the fact that a metric space with <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> points can have
+magnitude (&#x201c;effective number of points&#x201d;) greater than <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>, even if the
+associated matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Z</mi></mrow><annotation encoding='application/x-tex'>Z</annotation></semantics></math> is positive definite.  </p>
+
+<p>These examples may seem counterintuitive, but Eaton cautions us
+to beware of our feeble intuitions:</p>
+
+<blockquote>
+  <p>These examples show that our rather vague intuitive feeling that
+&#x201c;positive correlation tends to decrease information content in an
+experiment&#x201d; is very far from the truth, even for rather simple normal
+experiments with three observations.</p>
+</blockquote>
+
+<p>Anyone with any statistical knowledge who&#x2019;s still reading will easily have
+picked up on the fact that I&#x2019;m a total amateur.  If that&#x2019;s you, I&#x2019;d love to
+hear your comments!</p>
+
+</div>
+
+
+<span class='posted'>Posted at December 18, 2014 10:25 PM UTC
+</span>
+</div>
+
+<p class='trackback-url'>TrackBack URL for this Entry:&#xa0;&#xa0; http://golem.ph.utexas.edu/cgi-bin/MT-3.0/dxy-tb.fcgi/2793</p>
+
+
+<h2 class='comments-head' id='related'>Some Related Entries</h2>
+
+<div id='pane'>
+
+<form method='get' action='/cgi-bin/MT-3.0/mt-search.cgi'>
+<fieldset class='search'>
+  <input type='hidden' name='IncludeBlogs' value='3' />
+  <input type='hidden' name='Template' value='category' />
+  <label for='search' accesskey='4'>Search for other entries:</label><br />
+  <input id='search' name='search' size='25' /><br />
+  <input type='submit' value='Search' />
+</fieldset>
+</form>
+
+
+
+</div>
+
+<ul class='blogbody related'>
+
+   <li><a href='/category/2010/09/fetishizing_pvalues.html'>Fetishizing <i>p</i>-Values</a> &#x2014;
+<i>Sep 23, 2010</i></li>
+
+</ul>
+</div>
+
+<h2 class="comments-head" id="comments">25 Comments &amp; 0 Trackbacks</h2>
+
+<div class="blogbody">
+
+<div class="comments-body" id="c047938">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>I am also an amateur at statistics. However, on the question of how n positively correlated samples can have an effective sample size greater than n, I wonder how you can know what the true correlation matrix of your samples is. Presumably that knowledge is what somehow gets you the extra power of your experiment.</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="https://www.uea.ac.uk/~ccf09tku/" href="https://www.uea.ac.uk/~ccf09tku/" rel="nofollow">Jonathan Kirby</a> on December 19, 2014  9:35 AM | <a href="/category/2014/12/effective_sample_size.html#c047938" title="URL for comment by Jonathan Kirby [December 19, 2014  9:35 AM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47938" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Jonathan Kirby [December 19, 2014  9:35 AM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c047939">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>That&#8217;s a question I&#8217;ve wondered about myself.</p>
+
+<p>I suppose one can never <em>know</em> the correlation, but one can take a good guess at it.  Perhaps there&#8217;s a survey of trust in the Elbonian president taken annually, and although that trust level swings around wildly from year to year, the correlations within and between different towns remain about the same.  In that case, it would be reasonable to assume that they&#8217;ll be about the same this year.</p>
+
+<p>Or perhaps we know nothing about the mass of men in Mali, but we do know how well-correlated the masses of brothers tend to be in other countries, and we therefore feel it&#8217;s safe to assume that the correlation is similar there.</p>
+
+<p>But I&#8217;d be happy if someone more knowledgeable gave their point of view. </p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 19, 2014 10:29 AM | <a href="/category/2014/12/effective_sample_size.html#c047939" title="URL for comment by Tom Leinster [December 19, 2014 10:29 AM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47939" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 19, 2014 10:29 AM]">Reply to this</a>
+</div>
+</div>
+
+
+<div class="comments-body" id="c047947">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Probably part of the story is that having a high <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi mathvariant='normal'>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_{\mathrm{eff}}</annotation></semantics></math> doesn&#8217;t really guarantee that your sample is &#8220;statistically powerful&#8221;.</p>
+
+<p>For one thing, notice in the two examples that Tom gave that as the magnitude tends to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>&#x221e;</mn></mrow><annotation encoding='application/x-tex'>\infty</annotation></semantics></math>, the covariance matrix tends toward a singular matrix, for which no weighting exists. When no weighting exists, it seems that you can&#8217;t actually construct an unbiased estimator.</p>
+
+<p>What if the magnitude is very large, but not infinite? In the 2-element sample, the weighting for  covariance of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>[</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>&#x3c1;</mi></mrow></mfrac><mo>,</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>&#x3c1;</mi></mrow></mfrac><msup><mo stretchy='false'>]</mo> <mi>T</mi></msup></mrow><annotation encoding='application/x-tex'>[\frac 1 {1+\rho}, \frac 1 {1+\rho}]^T</annotation></semantics></math>. So if you think that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math> is <em>close</em> to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>-1</annotation></semantics></math>, but it could be off by <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3f5;</mi></mrow><annotation encoding='application/x-tex'>\epsilon</annotation></semantics></math>, then all you know about the correct weighting is that it&#8217;s of the form <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>[</mo><mi>&#x3b1;</mi><mo>,</mo><mi>&#x3b1;</mi><msup><mo stretchy='false'>]</mo> <mi>T</mi></msup></mrow><annotation encoding='application/x-tex'>[\alpha, \alpha]^T</annotation></semantics></math> for some <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3b1;</mi></mrow><annotation encoding='application/x-tex'>\alpha</annotation></semantics></math> with <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mfrac><mn>1</mn><mi>&#x3f5;</mi></mfrac><mo>&#x2264;</mo><mi>&#x3b1;</mi><mo>&#x2264;</mo><mn>&#x221e;</mn></mrow><annotation encoding='application/x-tex'>\frac 1 \epsilon\leq \alpha \leq \infty</annotation></semantics></math>. So actually choosing a correct estimator is infeasible.</p>
+
+<p>I&#8217;m trying to wrap my head around this intuitively &#8211; if a two-element sample identically distributed and perfectly anticorrelated, then their sum always gives the mean exactly, right? So why doesn&#8217;t <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>[</mo><mn>1</mn><mo>,</mo><mn>1</mn><msup><mo stretchy='false'>]</mo> <mi>T</mi></msup></mrow><annotation encoding='application/x-tex'>[1,1]^T</annotation></semantics></math> come out as the optimal estimator? </p>
+
+<p>Anyway, I&#8217;m guessing the connection between infinite <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi mathvariant='normal'>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_\mathrm{eff}</annotation></semantics></math> and a singular covariance matrix is a general phenomenon. Having a very high <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>n</mi> <mi mathvariant='normal'>eff</mi></msub></mrow><annotation encoding='application/x-tex'>n_{\mathrm{eff}}</annotation></semantics></math> probably goes hand in hand with having a nearly-singular covariance matrix and having a weighting which is very sensitive to perturbations in the matrix.</p>
+</div>
+<div class="comments-post">Posted by:
+Tim Campion on December 19, 2014  6:50 PM | <a href="/category/2014/12/effective_sample_size.html#c047947" title="URL for comment by Tim Campion [December 19, 2014  6:50 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47947" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tim Campion [December 19, 2014  6:50 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c047953">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Like the first example, you can think of the second example as you having the ability to cancel out noise.  We can produce the second covariance matrix with</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><msub><mi>&#x3f5;</mi> <mn>1</mn></msub><mspace width='1em' /><msub><mi>Y</mi> <mn>2</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><msub><mi>&#x3f5;</mi> <mn>2</mn></msub><mspace width='1em' /><msub><mi>Y</mi> <mn>3</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><mi>&#x3c1;</mi><msub><mi>&#x3f5;</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x3c1;</mi><msub><mi>&#x3f5;</mi> <mn>2</mn></msub><mo>+</mo><mrow><mo>(</mo><msqrt><mrow><mn>1</mn><mo>&#x2212;</mo><mn>2</mn><msup><mi>&#x3c1;</mi> <mn>2</mn></msup></mrow></msqrt><mo>)</mo></mrow><msub><mi>&#x3f5;</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>Y_1 = \mu + \epsilon_1 \quad Y_2 = \mu + \epsilon_2 \quad Y_3 = \mu + \rho\epsilon_1 + \rho\epsilon_2 + \left(\sqrt{1 - 2\rho^2}\right)\epsilon_3</annotation></semantics></math></p>
+
+<p>where the <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3f5;</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>\epsilon_i</annotation></semantics></math>s are independent with variance 1, mean 0.  When the coefficient of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3f5;</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>\epsilon_3</annotation></semantics></math> is zero you can get a linear combination with just <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3bc;</mi></mrow><annotation encoding='application/x-tex'>\mu</annotation></semantics></math>, and the covariance matrix is a sum of two rank 1 matrices.</p>
+</div>
+<div class="comments-post">Posted by:
+ap on December 20, 2014  3:20 AM | <a href="/category/2014/12/effective_sample_size.html#c047953" title="URL for comment by ap [December 20, 2014  3:20 AM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47953" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by ap [December 20, 2014  3:20 AM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c047962">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Thanks.  </p>
+
+<p>Let&#8217;s see if I understand.</p>
+
+<p>When <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi><mo>=</mo><msqrt><mn>2</mn></msqrt><mo stretchy='false'>/</mo><mn>2</mn></mrow><annotation encoding='application/x-tex'>\rho = \sqrt{2}/2</annotation></semantics></math> (or, as you say, when <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msqrt><mrow><mn>1</mn><mo>&#x2212;</mo><mn>2</mn><msup><mi>&#x3c1;</mi> <mn>2</mn></msup></mrow></msqrt><mo>=</mo><mn>0</mn></mrow><annotation encoding='application/x-tex'>\sqrt{1 - 2\rho^2} = 0</annotation></semantics></math>), we get </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>Y</mi> <mn>3</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><mi>&#x3c1;</mi><msub><mi>&#x3f5;</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x3c1;</mi><msub><mi>&#x3f5;</mi> <mn>2</mn></msub><mo>=</mo><mo stretchy='false'>(</mo><mn>1</mn><mo>&#x2212;</mo><mn>2</mn><mi>&#x3c1;</mi><mo stretchy='false'>)</mo><mi>&#x3bc;</mi><mo>+</mo><mi>&#x3c1;</mi><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x3c1;</mi><msub><mi>Y</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>
+Y_3 = \mu + \rho\epsilon_1 + \rho\epsilon_2 = (1 - 2\rho)\mu + \rho Y_1 + \rho Y_2
+</annotation></semantics></math></p>
+
+<p>and so</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>&#x3bc;</mi><mo>=</mo><mfrac><mrow><mi>&#x3c1;</mi><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x3c1;</mi><msub><mi>Y</mi> <mn>2</mn></msub><mo>&#x2212;</mo><msub><mi>Y</mi> <mn>3</mn></msub></mrow><mrow><mn>2</mn><mi>&#x3c1;</mi><mo>&#x2212;</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>Y</mi> <mn>2</mn></msub><mo>&#x2212;</mo><msqrt><mn>2</mn></msqrt><msub><mi>Y</mi> <mn>3</mn></msub></mrow><mrow><mn>2</mn><mo>&#x2212;</mo><msqrt><mn>2</mn></msqrt></mrow></mfrac><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+\mu = \frac{\rho Y_1 + \rho Y_2 - Y_3}{2\rho - 1}
+= \frac{Y_1 + Y_2 - \sqrt{2} Y_3}{2 - \sqrt{2}}.
+</annotation></semantics></math></p>
+
+<p>So if we know <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub></mrow><annotation encoding='application/x-tex'>Y_1</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>Y_2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>Y_3</annotation></semantics></math> then we know <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3bc;</mi></mrow><annotation encoding='application/x-tex'>\mu</annotation></semantics></math>.  </p>
+
+<p>What is the significance of this:</p>
+
+<blockquote>
+  <p>the covariance matrix is a sum of two rank 1 matrices</p>
+</blockquote>
+
+<p>?</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 20, 2014  9:52 PM | <a href="/category/2014/12/effective_sample_size.html#c047962" title="URL for comment by Tom Leinster [December 20, 2014  9:52 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47962" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 20, 2014  9:52 PM]">Reply to this</a>
+</div>
+</div>
+
+
+<div class="comments-body" id="c047964">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>In case anyone read ap&#8217;s comment and is wondering <em>why</em> the matrix </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>R</mi><mo>=</mo><mrow><mo>(</mo><mrow><mtable rowspacing='0.5ex'><mtr><mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mi>&#x3c1;</mi></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mi>&#x3c1;</mi></mtd></mtr> <mtr><mtd><mi>&#x3c1;</mi></mtd> <mtd><mi>&#x3c1;</mi></mtd> <mtd><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding='application/x-tex'>
+R =
+\begin{pmatrix}
+1&amp;0&amp;\rho\\
+0&amp;1&amp;\rho\\
+\rho&amp;\rho&amp;1
+\end{pmatrix}
+</annotation></semantics></math></p>
+
+<p>is the correlation matrix of </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><msub><mi>&#x3f5;</mi> <mn>1</mn></msub><mo>,</mo><mspace width='2em' /><msub><mi>Y</mi> <mn>2</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><msub><mi>&#x3f5;</mi> <mn>2</mn></msub><mo>,</mo><mspace width='2em' /><msub><mi>Y</mi> <mn>3</mn></msub><mo>=</mo><mi>&#x3bc;</mi><mo>+</mo><mi>&#x3c1;</mi><msub><mi>&#x3f5;</mi> <mn>1</mn></msub><mo>+</mo><mi>&#x3c1;</mi><msub><mi>&#x3f5;</mi> <mn>2</mn></msub><mo>+</mo><mo maxsize='1.8em' minsize='1.8em'>(</mo><msqrt><mrow><mn>1</mn><mo>&#x2212;</mo><mn>2</mn><msup><mi>&#x3c1;</mi> <mn>2</mn></msup></mrow></msqrt><mo maxsize='1.8em' minsize='1.8em'>)</mo><msub><mi>&#x3f5;</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>
+Y_1 = \mu + \epsilon_1,
+\qquad
+Y_2 = \mu + \epsilon_2,
+\qquad
+Y_3 = \mu + \rho\epsilon_1 + \rho\epsilon_2 + \Bigl(\sqrt{1 - 2\rho^2} \Bigr) \epsilon_3
+</annotation></semantics></math></p>
+
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3bc;</mi></mrow><annotation encoding='application/x-tex'>\mu</annotation></semantics></math> is any constant and the <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3f5;</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>\epsilon_i</annotation></semantics></math> are independent with mean <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math> and variance <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>, here&#8217;s the story.  </p>
+
+<p>I said in my post that any real positive semidefinite <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi><mo>&#xd7;</mo><mi>n</mi></mrow><annotation encoding='application/x-tex'>n \times n</annotation></semantics></math> matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> with <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>s down the diagonal is the correlation matrix of some <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>-tuple of random variables.  The proof I know uses the fact that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> has a real symmetric square root <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math>.  In fact, all that really matters is that there&#8217;s some real matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>S</mi></mrow><annotation encoding='application/x-tex'>S</annotation></semantics></math> satisfying <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>S</mi><msup><mi>S</mi> <mi>t</mi></msup><mo>=</mo><mi>R</mi></mrow><annotation encoding='application/x-tex'>S S^t = R</annotation></semantics></math>.  </p>
+
+<p>Now take independent random variables <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3f5;</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>&#x3f5;</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>\epsilon_1, \ldots, \epsilon_n</annotation></semantics></math>, each with variance <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>.  Put &#8220;<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi><mo>=</mo><mi>S</mi><mi>&#x3f5;</mi></mrow><annotation encoding='application/x-tex'>Y = S\epsilon</annotation></semantics></math>&#8221;, that is, define random variables <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math> by</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>Y</mi> <mi>i</mi></msub><mo>=</mo><munder><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo> <mi>j</mi></munder><msub><mi>S</mi> <mrow><mi>i</mi><mi>j</mi></mrow></msub><msub><mi>&#x3f5;</mi> <mi>j</mi></msub><mo>.</mo></mrow><annotation encoding='application/x-tex'>
+Y_i = \sum_j S_{i j} \epsilon_j.
+</annotation></semantics></math></p>
+
+<p>Then it&#8217;s easy to show that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math> have correlation matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math>.  </p>
+
+<p>(You can, if you want, add a constant <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>&#x3bc;</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>\mu_i</annotation></semantics></math> to each <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mi>i</mi></msub></mrow><annotation encoding='application/x-tex'>Y_i</annotation></semantics></math>; that doesn&#8217;t change their correlation matrix.)</p>
+
+<p>Implicitly, ap used the matrix</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>S</mi><mo>=</mo><mrow><mo>(</mo><mrow><mtable rowspacing='0.5ex'><mtr><mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mn>0</mn></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd></mtr> <mtr><mtd><mi>&#x3c1;</mi></mtd> <mtd><mi>&#x3c1;</mi></mtd> <mtd><msqrt><mrow><mn>1</mn><mo>&#x2212;</mo><mn>2</mn><msup><mi>&#x3c1;</mi> <mn>2</mn></msup></mrow></msqrt></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding='application/x-tex'>
+S 
+=
+\begin{pmatrix} 
+1 &amp;0 &amp;0 \\
+0 &amp;1 &amp;0 \\
+\rho &amp;\rho &amp;\sqrt{1 - 2\rho^2}
+\end{pmatrix}
+</annotation></semantics></math></p>
+
+<p>in defining <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub></mrow><annotation encoding='application/x-tex'>Y_1</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>2</mn></msub></mrow><annotation encoding='application/x-tex'>Y_2</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>3</mn></msub></mrow><annotation encoding='application/x-tex'>Y_3</annotation></semantics></math>.  A quick calculation shows that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>S</mi><msup><mi>S</mi> <mi>t</mi></msup></mrow><annotation encoding='application/x-tex'>S S^t</annotation></semantics></math> is indeed the matrix <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>R</mi></mrow><annotation encoding='application/x-tex'>R</annotation></semantics></math> defined at the start of this comment and in the last example of my post.</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 20, 2014 10:08 PM | <a href="/category/2014/12/effective_sample_size.html#c047964" title="URL for comment by Tom Leinster [December 20, 2014 10:08 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47964" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 20, 2014 10:08 PM]">Reply to this</a>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="comments-body" id="c047961">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Hi Tim.  In the 2-element example, the <em>weighting</em> is the transpose of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>(</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>&#x3c1;</mi></mrow></mfrac><mo>,</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mi>&#x3c1;</mi></mrow></mfrac><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(\frac{1}{1 + \rho}, \frac{1}{1 + \rho})</annotation></semantics></math>, so yes, that varies with <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math>.  But the best estimator is </p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mfrac><mn>1</mn><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo></mrow></mfrac><mo stretchy='false'>(</mo><msub><mi>w</mi> <mn>1</mn></msub><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>w</mi> <mn>2</mn></msub><msub><mi>Y</mi> <mn>2</mn></msub><mo stretchy='false'>)</mo><mo>,</mo></mrow><annotation encoding='application/x-tex'>
+\frac{1}{|R|}(w_1 Y_1 + w_2 Y_2),
+</annotation></semantics></math></p>
+
+<p>which (by calculation or simply by symmetry) is always <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy='false'>(</mo><msub><mi>Y</mi> <mn>1</mn></msub><mo>+</mo><msub><mi>Y</mi> <mn>2</mn></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>\frac{1}{2}(Y_1 + Y_2)</annotation></semantics></math>, regardless of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math>.  </p>
+
+<p>(When you said &#8220;if a two-element sample is identically distributed and perfectly anticorrelated, then their sum always gives the mean exactly&#8221;, you were out by a factor of 2.)</p>
+
+<p>Knowing that two variables are strongly anticorrelated tells you a great deal, it seems.  And surely related to that is that it&#8217;s rather hard to think of situations where you <em>would</em> know that variables were strongly anticorrelated.  </p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 20, 2014  9:42 PM | <a href="/category/2014/12/effective_sample_size.html#c047961" title="URL for comment by Tom Leinster [December 20, 2014  9:42 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47961" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 20, 2014  9:42 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c047993">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Ah, I see that I made the very silly mistake of missing a factor of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mfrac><mn>1</mn><mrow><mo stretchy='false'>|</mo><mi>R</mi><mo stretchy='false'>|</mo></mrow></mfrac></mrow><annotation encoding='application/x-tex'>\frac 1 {|R|}</annotation></semantics></math>. Thanks for setting me straight.</p>
+
+<p>One thing to notice is that if we drop the assumption that the variables are identically distributed, the power of anticorrelation goes away, intuitively. How much of this whole story survives if we do drop this assumption?</p>
+</div>
+<div class="comments-post">Posted by:
+Tim Campion on December 22, 2014  6:44 PM | <a href="/category/2014/12/effective_sample_size.html#c047993" title="URL for comment by Tim Campion [December 22, 2014  6:44 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47993" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tim Campion [December 22, 2014  6:44 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c047995">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Is it obvious that the actual value of the (anti-)correlation value changes its effectiveness as the distributions become different? Since you can show that the correlation for a signal is maximised/minimised by equal/negated version of the original signal (respectively). As such, as the distributions become more different the range of attainable correlation values is reduced. So the different distributions reduce the knowledge &#8220;through&#8221; how the correlation value behave; do the distributions of the random variables have any effect other than this?</p>
+</div>
+<div class="comments-post">Posted by:
+davetweed on December 22, 2014 11:35 PM | <a href="/category/2014/12/effective_sample_size.html#c047995" title="URL for comment by davetweed [December 22, 2014 11:35 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47995" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by davetweed [December 22, 2014 11:35 PM]">Reply to this</a>
+</div>
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="comments-body" id="c047957">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Very nice!</p>
+
+<p>If the entries in the correlation coefficient are all nonnegative and we take their negative logarithms, do we get a metric space?</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.sandiego.edu/~shulman" href="http://www.sandiego.edu/~shulman" rel="nofollow">Mike Shulman</a> on December 20, 2014  6:35 PM | <a href="/category/2014/12/effective_sample_size.html#c047957" title="URL for comment by Mike Shulman [December 20, 2014  6:35 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47957" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Mike Shulman [December 20, 2014  6:35 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c047960">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Thanks!</p>
+
+<p>The answer to your question is no.  Take the matrix mentioned at the end of the post,</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mi>R</mi><mo>=</mo><mrow><mo>(</mo><mrow><mtable rowspacing='0.5ex'><mtr><mtd><mn>1</mn></mtd> <mtd><mn>0</mn></mtd> <mtd><mi>&#x3c1;</mi></mtd></mtr> <mtr><mtd><mn>0</mn></mtd> <mtd><mn>1</mn></mtd> <mtd><mi>&#x3c1;</mi></mtd></mtr> <mtr><mtd><mi>&#x3c1;</mi></mtd> <mtd><mi>&#x3c1;</mi></mtd> <mtd><mn>1</mn></mtd></mtr></mtable></mrow><mo>)</mo></mrow></mrow><annotation encoding='application/x-tex'>
+R 
+=
+\begin{pmatrix}
+1 &amp;0 &amp;\rho \\
+0 &amp;1 &amp;\rho \\
+\rho &amp;\rho &amp;1
+\end{pmatrix}
+</annotation></semantics></math></p>
+
+<p>where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>&#x3c1;</mi><mo>&lt;</mo><msqrt><mn>2</mn></msqrt><mo stretchy='false'>/</mo><mn>2</mn></mrow><annotation encoding='application/x-tex'>0 \lt \rho \lt \sqrt{2}/2</annotation></semantics></math>.  This is positive definite and has <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math>s down the diagonal, so its a correlation matrix.  (Indeed, <a href="https://golem.ph.utexas.edu/category/2014/12/effective_sample_size.html#c047953">ap&#8217;s comment</a> gives an explicit construction of some random variables that it&#8217;s the correlation matrix of.)  But if it came from a metric space in the way you describe, it would satisfy a version of the triangle inequality:</p>
+
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><msub><mi>R</mi> <mrow><mn>1</mn><mn>2</mn></mrow></msub><mo>&#x2265;</mo><msub><mi>R</mi> <mrow><mn>1</mn><mn>3</mn></mrow></msub><msub><mi>R</mi> <mrow><mn>3</mn><mn>2</mn></mrow></msub><mo>,</mo></mrow><annotation encoding='application/x-tex'>
+R_{1 2} \geq R_{1 3} R_{3 2},
+</annotation></semantics></math></p>
+
+<p>which is false.  (More intuitively, the &#8220;<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math>&#8221; in the <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>(</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(1, 2)</annotation></semantics></math> position says that the 1st and 2nd points are infinitely far apart, whereas the &#8220;<math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math>&#8220;s at <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>(</mo><mn>1</mn><mo>,</mo><mn>3</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(1, 3)</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>(</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(2, 3)</annotation></semantics></math> say that both the 1st and 2nd points are at finite distance from the 3rd point.)</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 20, 2014  9:34 PM | <a href="/category/2014/12/effective_sample_size.html#c047960" title="URL for comment by Tom Leinster [December 20, 2014  9:34 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47960" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 20, 2014  9:34 PM]">Reply to this</a>
+</div>
+</div>
+
+
+<div class="comments-body" id="c047963">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Note that there&#8217;s another problem to surmount: the correlation between the random variable <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi><mo>+</mo><mi>c</mi></mrow><annotation encoding='application/x-tex'>X+c</annotation></semantics></math> is 1, so any transformation that maps that to 0 will violate the &#8220;distance zero means equal&#8221; condition (unless you possibly redefine what equal means).</p>
+</div>
+<div class="comments-post">Posted by:
+dave tweed on December 20, 2014  9:53 PM | <a href="/category/2014/12/effective_sample_size.html#c047963" title="URL for comment by dave tweed [December 20, 2014  9:53 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47963" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by dave tweed [December 20, 2014  9:53 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c047965">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Yes, good point: having correlation <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>1</mn></mrow><annotation encoding='application/x-tex'>1</annotation></semantics></math> doesn&#8217;t mean being identical.</p>
+
+<p>Somewhat relatedly, having correlation <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0</mn></mrow><annotation encoding='application/x-tex'>0</annotation></semantics></math> is a much weaker condition than being independent.  </p>
+
+<p>The Wikipedia page on <a href="https://en.wikipedia.org/wiki/Uncorrelated">uncorrelated random variables</a> has a nice example (which I guess is standard).  Let <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> be distributed uniformly on <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>[</mo><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>1</mn><mo>,</mo><mn>1</mn><mo stretchy='false'>]</mo></mrow><annotation encoding='application/x-tex'>[-1, 1]</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi><mo>=</mo><msup><mi>X</mi> <mn>2</mn></msup></mrow><annotation encoding='application/x-tex'>Y = X^2</annotation></semantics></math>.  Then <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> are not independent, to say the least!  But their correlation coefficient is zero.  </p>
+
+<p>Roughly, the reason they&#8217;re uncorrelated is that an increase in <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> is equally likely to have been produced by an increase or a decrease in <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math>.  E.g. if we know that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> has changed from <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0.3</mn></mrow><annotation encoding='application/x-tex'>0.3</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0.31</mn></mrow><annotation encoding='application/x-tex'>0.31</annotation></semantics></math>, then that means that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> has <em>either</em> changed from <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mrow></mrow> <mo>+</mo></msup><msqrt><mn>0.3</mn></msqrt></mrow><annotation encoding='application/x-tex'>{}^+\sqrt{0.3}</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mrow></mrow> <mo>+</mo></msup><msqrt><mn>0.31</mn></msqrt></mrow><annotation encoding='application/x-tex'>{}^+\sqrt{0.31}</annotation></semantics></math> <em>or</em> changed from <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mrow></mrow> <mo>&#x2212;</mo></msup><msqrt><mn>3</mn></msqrt></mrow><annotation encoding='application/x-tex'>{}^-\sqrt{3}</annotation></semantics></math> to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msup><mrow></mrow> <mo>&#x2212;</mo></msup><msqrt><mn>0.31</mn></msqrt></mrow><annotation encoding='application/x-tex'>{}^-\sqrt{0.31}</annotation></semantics></math>, and the two possibilities are equally probable.</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 20, 2014 10:17 PM | <a href="/category/2014/12/effective_sample_size.html#c047965" title="URL for comment by Tom Leinster [December 20, 2014 10:17 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47965" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 20, 2014 10:17 PM]">Reply to this</a>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="comments-body" id="c047975">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Well, but after Lawvere we all know there&#8217;s no reason to demand metric spaces to be skeletal, right?  (-:</p>
+
+<p>If in some case we do get a (not necessarily skeletal) metric space, does that say anything interesting about the random variables we started with?</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.sandiego.edu/~shulman" href="http://www.sandiego.edu/~shulman" rel="nofollow">Mike Shulman</a> on December 21, 2014  8:25 PM | <a href="/category/2014/12/effective_sample_size.html#c047975" title="URL for comment by Mike Shulman [December 21, 2014  8:25 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47975" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Mike Shulman [December 21, 2014  8:25 PM]">Reply to this</a>
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="comments-body" id="c047968">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><blockquote><p>These examples show that our rather vague intuitive feeling that &#x201c;positive correlation tends to decrease information content in an experiment&#x201d; is very far from the truth, even for rather simple normal experiments with three observations.</p></blockquote><p>The way I justified this observation to myself back in the nineties was that when the variables are correlated to an unknown degree, there is actual information hidden in the difference between a sampled value of a variable and the expected value based on the assumed correlation and the sampled values of other variables. In the limit when the correlation is 1.0, any deviation at all would produce a numerically infinite information value given that the sampled value is supposedly impossible.</p><p>In such cases I found it made intuitive sense to treat such extra information as pertaining to the the correlation itself and tweak <i>that</i> to minimize the effect. </p></div>
+<div class="comments-post">Posted by:
+Jouni Kosonen on December 20, 2014 11:30 PM | <a href="/category/2014/12/effective_sample_size.html#c047968" title="URL for comment by Jouni Kosonen [December 20, 2014 11:30 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47968" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Jouni Kosonen [December 20, 2014 11:30 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c047974">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>I&#8217;ve been turning this over in my mind in the last 24 hours or so, and I think I kind of get what you mean, but it&#8217;s fuzzy.  </p>
+
+<p>One point is that we <em>don&#8217;t</em> see this effect with two positively correlated variables.  There, the effective sample size is <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>2</mn><mo stretchy='false'>/</mo><mo stretchy='false'>(</mo><mn>1</mn><mo>+</mo><mi>&#x3c1;</mi><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>2/(1 + \rho)</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi></mrow><annotation encoding='application/x-tex'>\rho</annotation></semantics></math> is the correlation coefficient.  This <em>decreases</em> as <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3c1;</mi><mo>&#x2192;</mo><mn>1</mn></mrow><annotation encoding='application/x-tex'>\rho \to 1</annotation></semantics></math>.  </p>
+
+<p>Any explanation needs to account for why the effect isn&#8217;t seen until <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding='application/x-tex'>n = 3</annotation></semantics></math>.  Do you have an intuition as to why that is? </p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 21, 2014  8:13 PM | <a href="/category/2014/12/effective_sample_size.html#c047974" title="URL for comment by Tom Leinster [December 21, 2014  8:13 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47974" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 21, 2014  8:13 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c048179">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Sorry for the long delay, I forgot I actually posted that.</p>
+
+<p><i>Any explanation needs to account for why the effect isn&#8217;t seen until <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'>
+  <semantics>
+    <mrow>
+      <mi>n</mi>
+      <mo>=</mo>
+      <mn>3</mn>
+    </mrow>
+    <annotation encoding='application/x-tex'>n = 3</annotation>
+  </semantics>
+</math>. Do you have an intuition as to why that is? </i></p>
+
+<p>An intuition, nothing more. For two points in a metric manifold, a single number is sufficient to represent the distance between two points. For three points, the sum of pairwise distances (the perimeter of the triangle) can be used in the same way but this ends up ignoring the described area that carries information about the separation of the points as well. For four or more points the informational value of the single scalar drops more as the dimensionality of the ignored information rises.</p>
+
+<p>I posit that the underlying assumption that a real-valued correlation factor is a good choice for three or more variables is false and loses information about the nature of the correlation itself.</p>
+</div>
+<div class="comments-post">Posted by:
+Jouni Kosonen on January 24, 2015 12:04 PM | <a href="/category/2014/12/effective_sample_size.html#c048179" title="URL for comment by Jouni Kosonen [January 24, 2015 12:04 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=48179" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Jouni Kosonen [January 24, 2015 12:04 PM]">Reply to this</a>
+</div>
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="comments-body" id="c047994">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>I was thinking about an effective-sample-size-like notion the other day.</p>
+
+<p>Shine a laser at a rough surface and you see a speckle pattern like <a href="http://en.wikipedia.org/wiki/Speckle_pattern#mediaviewer/File:Laser_speckle.jpg">this</a>.</p>
+
+<p>The intensity at each point can be modelled as the sum of many Gaussian variables. But if you look at the intensity at point A close to point B they are correlated. The distance from A to B has to be the size of a couple of speckle &#8220;lumps&#8221; before the correlation is small. So if you&#8217;re looking at some area with a speckle pattern on it, it makes intuitive sense to talk of an effective number of independent variables per unit area underlying that pattern. I&#8217;m not sure if this can be carried through rigorously but it seems related to what you&#8217;re talking about.</p>
+
+<p>One reason I mention this is that you can think of speckle as emerging from a Feynman path integral. The speckle pattern arises from the statistics of summing over many paths from light source to surface to eye, each with a different phase. So this may connect back to notions of size mentioned way back on the n-category cafe.</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://blog.sigfpe.com" href="http://blog.sigfpe.com" rel="nofollow"> Dan Piponi</a> on December 22, 2014 10:39 PM | <a href="/category/2014/12/effective_sample_size.html#c047994" title="URL for comment by  Dan Piponi [December 22, 2014 10:39 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=47994" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by  Dan Piponi [December 22, 2014 10:39 PM]">Reply to this</a>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<div class="comments-body" id="c048011">
+<h3 class="title">Making the story fit the math</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>In your analysis you require the variables <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1,\ldots,Y_n</annotation></semantics></math> to be identically distributed to the distribution of interest. To make the Elbonia surveying story fit this assumption, you&#8217;d have to send each of your surveyors to a randomly chosen region of the country, but in such a manner that the probability of a region getting a surveyor is proportional to the region&#8217;s population. (Otherwise people from regions of low population density would exert an undue influence on the results.) Then each surveyor would be instructed to measure a number of people in their assigned region (presumably with known correlation coefficients among those measurements).</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://math-www.uni-paderborn.de/~axel/" href="http://math-www.uni-paderborn.de/~axel/" rel="nofollow">Axel Boldt</a> on December 24, 2014  7:58 PM | <a href="/category/2014/12/effective_sample_size.html#c048011" title="URL for comment by Axel Boldt [December 24, 2014  7:58 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=48011" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Axel Boldt [December 24, 2014  7:58 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c048024">
+<h3 class="title">Re: Making the story fit the math</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Actually, I asked a bit more than I needed.  It would have been enough to ask that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math> have the same mean and variance.  (The latter condition goes by the superb name of <a href="https://en.wikipedia.org/wiki/Homoscedasticity">homoscedasticity</a>, I recently learned.)  But I&#8217;m not sure that makes a substantial difference.</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 29, 2014 12:23 AM | <a href="/category/2014/12/effective_sample_size.html#c048024" title="URL for comment by Tom Leinster [December 29, 2014 12:23 AM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=48024" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 29, 2014 12:23 AM]">Reply to this</a>
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="comments-body" id="c048036">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>I just got around to reading this post.  I hope to find the time to give it more thought sometime soon, but in the meantime I have a comment on one small part:</p>
+
+<blockquote>
+  <p>You might expect the effective size of a sample of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> individuals to be at most <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>. It&#x2019;s not.</p>
+</blockquote>
+
+<p>Personally, I wouldn&#8217;t expect this.  Here&#8217;s why: Saying that the effective sample size is <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>k</mi></mrow><annotation encoding='application/x-tex'>k</annotation></semantics></math> means that, in some sense, it gives you the same amount of information about the underlying distribution as a sample of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>k</mi></mrow><annotation encoding='application/x-tex'>k</annotation></semantics></math> independent individuals.  The thing is, <em>independent</em> samples are by no means the best possible for learning a distribution.  It&#8217;s better if each individual strikes some balance between being typical and being as different as possible from the previously sampled individuals.  (The precise meanings of &#8220;better&#8221;, &#8220;some balance&#8221;, &#8220;typical&#8221;, and &#8220;as different as possible&#8221; all depend on each other, of course.)</p>
+
+<p>For example, say <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>Y</mi></mrow><annotation encoding='application/x-tex'>Y</annotation></semantics></math> is uniformly distributed in <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>{</mo><mn>1</mn><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><mi>N</mi><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{1, \ldots , N\}</annotation></semantics></math>.  A best possible sample would be if <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>(</mo><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>N</mi></msub><mo stretchy='false'>)</mo></mrow><annotation encoding='application/x-tex'>(Y_1, \ldots, Y_N)</annotation></semantics></math> is a uniformly chosen permutation of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>{</mo><mn>1</mn><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><mi>N</mi><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{1, \ldots, N\}</annotation></semantics></math>.   These are very much not independent.  Coming at this from the opposite direction, if <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>Y</mi> <mn>1</mn></msub><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><msub><mi>Y</mi> <mi>n</mi></msub></mrow><annotation encoding='application/x-tex'>Y_1, \ldots, Y_n</annotation></semantics></math> are independent and uniformly chosen from <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo stretchy='false'>{</mo><mn>1</mn><mo>,</mo><mi>&#x2026;</mi><mo>,</mo><mi>N</mi><mo stretchy='false'>}</mo></mrow><annotation encoding='application/x-tex'>\{1, \ldots, N\}</annotation></semantics></math>, then you need <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi><mo>&#x2248;</mo><mi>N</mi><mi>log</mi><mi>N</mi></mrow><annotation encoding='application/x-tex'>n \approx N \log N</annotation></semantics></math> even to expect to see all the <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>N</mi></mrow><annotation encoding='application/x-tex'>N</annotation></semantics></math> possible values of this distribution.  (This is a classic problem in probability called the <em>coupon collector&#8217;s problem</em>.)</p>
+</div>
+<div class="comments-post">Posted by:
+Mark Meckes on December 29, 2014  7:25 PM | <a href="/category/2014/12/effective_sample_size.html#c048036" title="URL for comment by Mark Meckes [December 29, 2014  7:25 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=48036" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Mark Meckes [December 29, 2014  7:25 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c048052">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Isn&#8217;t it great how trainable intuition is?  Isn&#8217;t it great talking to other people whose intuition is trained in directions that your own isn&#8217;t?</p>
+
+<p>Your mathematical point reminds me of the following story.  In the early days of the iPod, Apple were inundated with complaints that the shuffle function wasn&#8217;t truly random.  Everyone kept telling them how songs by the same artiste would clump together: one Madonna song would usually be followed by another, and so on.  </p>
+
+<p>They had their technical people check the algorithm, and it turned out that nothing was wrong with it.  All that was wrong was people&#8217;s perception of randomness.  So they changed the algorithm to forbid clumping &#x2014; making it less random in order to persuade humans that it was more random.  </p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on December 30, 2014  4:39 PM | <a href="/category/2014/12/effective_sample_size.html#c048052" title="URL for comment by Tom Leinster [December 30, 2014  4:39 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=48052" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [December 30, 2014  4:39 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c048066">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Among other things, there&#8217;s a terminological problem highlighted by the anecdote about iPods, and my sympathies lie more with the users.</p>
+
+<p>Strictly speaking, any way of picking something is random &#8212; even a constant is a random variable, albeit a boring one.  (As usual, <a href="http://xkcd.com/221/">xkcd</a> has a great comment on this issue.)  The trouble is that many people, including many professional probabilists who secretly know better, use &#8220;random&#8221; to mean something much stronger.  Typically, a probabilist will say that <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> is &#8220;random&#8221; in a set <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3a9;</mi></mrow><annotation encoding='application/x-tex'>\Omega</annotation></semantics></math> if <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> is <em>uniformly</em> distributed in <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>&#x3a9;</mi></mrow><annotation encoding='application/x-tex'>\Omega</annotation></semantics></math> (assuming we&#8217;re in a context in which that even means anything), and that a sequence <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>X</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>X</mi> <mn>2</mn></msub><mo>,</mo><mi>&#x2026;</mi></mrow><annotation encoding='application/x-tex'>X_1, X_2, \ldots</annotation></semantics></math> is &#8220;random&#8221; if it is a sequence of independent (and uniform, if applicable) random variables.</p>
+
+<p>Now independent sequences of random variables are a reasonable model of many real-world phenomena, and it&#8217;s true that people have very poor intuition about how such sequences behave.  In particular, people underestimate how common clumping is.  Among other things, this contributes to people&#8217;s tendency to ascribe winning streaks in sports or gambling to something other than a perfectly ordinary side effect of randomness.  (I understand that careful studies by statisticians of sports statistics have found that &#8220;hot streaks&#8221;, about which many professional athletes have cherished superstitions, happen about as often and last about as long as independent-random-variable models would predict.)</p>
+
+<p>On the other hand, this by no means means that a &#8220;random&#8221; selection of songs ought to be chosen with independent picks.  It&#8217;s perfectly reasonable that a shuffle function ought to behave in a way that matches users&#8217; intuition about randomness better than independent random variables.  To make a semi-concrete proposal, if <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>X</mi> <mn>1</mn></msub><mo>,</mo><msub><mi>X</mi> <mn>2</mn></msub><mo>,</mo><mi>&#x2026;</mi></mrow><annotation encoding='application/x-tex'>X_1, X_2, \ldots</annotation></semantics></math> are the song choices, a good shuffle algorithm ought to result in the empirical measures
+<math xmlns="http://www.w3.org/1998/Math/MathML" display='block'><semantics><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo lspace='thinmathspace' rspace='thinmathspace'>&#x2211;</mo> <mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow> <mi>n</mi></munderover><msub><mi>&#x3b4;</mi> <mrow><msub><mi>X</mi> <mi>i</mi></msub></mrow></msub></mrow><annotation encoding='application/x-tex'>
+\frac{1}{n} \sum_{i=1}^n \delta_{X_i}
+</annotation></semantics></math>
+being good approximations of the uniform measure for large <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math>.  In fact the classical Glivenko&#8211;Cantelli theorem says that this will be the case for independent picks, but the approximation will not be the best possible.</p>
+
+<p>So from my point of view, the initial choice of an algorithm that chose successive tracks independently was a design flaw, albeit one that would probably be made by any other company.</p>
+</div>
+<div class="comments-post">Posted by:
+Mark Meckes on January  2, 2015  1:20 AM | <a href="/category/2014/12/effective_sample_size.html#c048066" title="URL for comment by Mark Meckes [January  2, 2015  1:20 AM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=48066" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Mark Meckes [January  2, 2015  1:20 AM]">Reply to this</a>
+</div>
+</div>
+
+
+
+</div>
+
+<div class="comments-body" id="c048084">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>Related to this point, I&#8217;d be very interested to find some perspective that makes sense of the possibility that a metric space has magnitude greater than its cardinality.  Thinking about that might help clarify what the magnitude of a metric space means.</p>
+</div>
+<div class="comments-post">Posted by:
+Mark Meckes on January  3, 2015  5:01 PM | <a href="/category/2014/12/effective_sample_size.html#c048084" title="URL for comment by Mark Meckes [January  3, 2015  5:01 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=48084" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Mark Meckes [January  3, 2015  5:01 PM]">Reply to this</a>
+</div>
+</div>
+
+<div class="comments-nest-box">
+<div class="comments-body" id="c048103">
+<h3 class="title">Re: Effective Sample Size</h3>
+
+<div><div><a href="http://golem.ph.utexas.edu/~distler/blog/mathml.html"><img class='mathlogo' src='https://golem.ph.utexas.edu/~distler/blog/images/MathML.png' alt='MathML-enabled post (click for more details).' title='MathML-enabled post (click for details).' /></a></div>
+
+<p>OK, so what we could do is: </p>
+
+<ul>
+<li><p>take a positive definite metric space <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> with magnitude larger than its cardinality (such as <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mn>0.35</mn><msub><mi>K</mi> <mrow><mn>3</mn><mo>,</mo><mn>2</mn></mrow></msub></mrow><annotation encoding='application/x-tex'>0.35 K_{3, 2}</annotation></semantics></math>, where <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><msub><mi>K</mi> <mrow><mn>3</mn><mo>,</mo><mn>2</mn></mrow></msub></mrow><annotation encoding='application/x-tex'>K_{3, 2}</annotation></semantics></math> is a complete bipartite graph, as in Example 2.4.11 of `The magnitude of metric spaces&#8217;)</p></li>
+<li><p>work out some string of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> random variables whose correlation matrix is the similarity matrix of <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>X</mi></mrow><annotation encoding='application/x-tex'>X</annotation></semantics></math> (which we know is possible)</p></li>
+<li><p>understand <em>why</em> the effective sample size represented by those <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math> random variables is greater than <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>n</mi></mrow><annotation encoding='application/x-tex'>n</annotation></semantics></math></p></li>
+<li><p>use that understanding to improve our understanding of why metric magnitude can be greater than cardinality.   </p></li>
+</ul>
+
+<p>In the example I cited, the phenomenon of magnitude greater than cardinality only shows up at a very narrow range of scales.  Specifically, it&#8217;s only for scale factors inside the range 0.345 to 0.355.  So understanding why it happens at all may be difficult.  </p>
+
+<p>Nevertheless, it might be possible.  As you know, what&#8217;s going on here is that the magnitude function <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>t</mi><mo>&#x21a6;</mo><mo stretchy='false'>|</mo><mi>t</mi><msub><mi>K</mi> <mrow><mn>3</mn><mo>,</mo><mn>2</mn></mrow></msub><mo stretchy='false'>|</mo></mrow><annotation encoding='application/x-tex'>t \mapsto |t K_{3, 2}|</annotation></semantics></math> has a singularity at <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mi>t</mi><mo>=</mo><mi>log</mi><mo stretchy='false'>(</mo><mn>2</mn><mo stretchy='false'>)</mo><mo stretchy='false'>/</mo><mn>2</mn><mo>&#x2248;</mo><mn>0.347</mn></mrow><annotation encoding='application/x-tex'>t = log(2)/2 \approx 0.347</annotation></semantics></math>.  Just to the left of that singularity, the magnitude tends to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo lspace='verythinmathspace' rspace='0em'>&#x2212;</mo><mn>&#x221e;</mn></mrow><annotation encoding='application/x-tex'>-\infty</annotation></semantics></math>, and just to the right, it tends to <math xmlns="http://www.w3.org/1998/Math/MathML" display='inline'><semantics><mrow><mo lspace='verythinmathspace' rspace='0em'>+</mo><mn>&#x221e;</mn></mrow><annotation encoding='application/x-tex'>+\infty</annotation></semantics></math>.</p>
+</div>
+<div class="comments-post">Posted by:
+<a title="http://www.maths.ed.ac.uk/~tl" href="http://www.maths.ed.ac.uk/~tl" rel="nofollow">Tom Leinster</a> on January  6, 2015  8:52 PM | <a href="/category/2014/12/effective_sample_size.html#c048103" title="URL for comment by Tom Leinster [January  6, 2015  8:52 PM]">Permalink</a>
+
+| <a href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794;parent_id=48103" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}" title="Respond to comment by Tom Leinster [January  6, 2015  8:52 PM]">Reply to this</a>
+</div>
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<p class="newpost"><a class="comments-post" href="/cgi-bin/MT-3.0/sxp-comments.fcgi?entry_id=2794" onclick="OpenComments(this.href); this.blur(); return false;" onkeypress="if(window.event.keyCode == 13){OpenComments(this.href); this.blur(); return false;}">Post a New Comment</a></p>
+
+</div>
+
+<div id="footer">   
+<h2>Access Keys:</h2>
+
+<dl id="AccessKeyList">
+<dt>0</dt><dd><a href="/category/accessibility.html" accesskey="0">Accessibility Statement</a></dd>
+<dt>1</dt><dd>Main Page</dd>
+<dt>2</dt><dd>Skip to Content</dd>
+<dt>3</dt><dd>List of Posts</dd>
+<dt>4</dt><dd>Search</dd>
+<dt>p</dt><dd>Previous (individual/monthly archive page)</dd>
+<dt>n</dt><dd>Next (individual/monthly archive page)</dd>
+</dl>
+<a href="/category/archives.html" accesskey="3"></a>
+</div>
+
+
+</div>
+
+</body>
+</html>

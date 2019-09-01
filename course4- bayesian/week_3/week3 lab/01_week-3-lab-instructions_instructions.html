@@ -1,0 +1,163 @@
+<meta charset="utf-8"/>
+<co-content>
+ <h2 level="2">
+  Install R and RStudio:
+ </h2>
+ <p>
+  First, you will need to install R and RStudio (other IDEs will not be supported). For those who are unfamiliar, R is the name of the programming language we will be using and RStudio is a convenient interface / development environment for the R language.
+ </p>
+ <ul bullettype="bullets">
+  <li>
+   <p>
+    <strong>
+     Install R
+    </strong>
+    : Install RStudio: Go to
+    <a href="https://www.rstudio.com/products/rstudio/download/">
+     https://www.rstudio.com/products/rstudio/download/
+    </a>
+    and click on the link for your operating system.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>
+     Install RStudio
+    </strong>
+    : Go to
+    <a href="https://www.rstudio.com/products/rstudio/download/preview/">
+     https://www.rstudio.com/products/rstudio/download/preview/
+    </a>
+    and click on the installer link for your operating system. Note that you need this updated preview version for labs in this course, so please make sure to install this version even if you have previously installed RStudio.
+   </p>
+  </li>
+ </ul>
+ <p>
+  See
+  <a href="https://www.youtube.com/watch?v=eD07NznguA4">
+   this video
+  </a>
+  for step-by-step installation instructions if needed.
+ </p>
+ <p>
+  <strong>
+   NOTE
+  </strong>
+  : Even if you already have R and RStudio installed, you should still visit these links to confirm that you have the most recent versions of these software installed.
+ </p>
+ <h2 level="2">
+  Install R Packages:
+ </h2>
+ <h3 level="3">
+  1. Install packages:
+ </h3>
+ <p>
+  Install the packages we will use in this lab.
+ </p>
+ <p>
+  Type the following commands in the Console:
+ </p>
+ <pre language="r">install.packages("tidyverse")
+install.packages("statsr")
+install.packages("PairedData")
+install.packages("dplyr")
+install.packages("ggplot2")</pre>
+ <p>
+ </p>
+ <h3 level="3">
+  2. Load other packages:
+ </h3>
+ <pre language="r">library(statsr)
+library(PairedData)
+library(dplyr)
+library(ggplot2)</pre>
+ <p>
+  The use of these packages will be discussed in detail in the lab.
+ </p>
+ <h2 level="2">
+  Download and Run the Lab File:
+ </h2>
+ <p>
+  Next, download the R Markdown file linked below, open it in RStudio, and click on
+  <strong>
+   Knit
+  </strong>
+  . This document contains the instructions for the lab.
+ </p>
+ <p hasmath="true">
+  <strong>
+   IMPORTANT
+  </strong>
+  : Use right-click (Ctrl+click on mac), then choose "Save link as..." to save the below R Markdown file. If Chrome doesn't work, switch to Firefox or other browsers when downloading the file. You may need to change the file extension to $$\verb|.Rmd|$$ by hand after downloading. You must download and
+  <strong>
+   knit
+  </strong>
+  this file and be able to view the instructions in it to complete the Week 3 Lab. So make sure to complete these steps before starting the lab.
+ </p>
+ <p>
+  <strong>
+   <a href="https://statswithr.github.io/labs/4.3_bayesian_inference/bayesian_inference.Rmd">
+    Bayesian Inference
+   </a>
+  </strong>
+ </p>
+ <p>
+  As you go through the contents of the lab instructions document you will encounter multiple choice questions, make sure to
+  <strong>
+   submit your answers to those questions in the lab quiz
+  </strong>
+  (next item in the course) to get credit. The ones marked with "Exercise" in the Rmd file are for your own practice -- you don't need to submit your answers to them. If any of your answers is incorrect, please check your code and try again!
+ </p>
+ <p>
+ </p>
+ <p>
+ </p>
+</co-content>
+<style>
+ body {
+    padding: 50px 85px 50px 85px;
+}
+
+table th, table td {
+    border: 1px solid #e0e0e0;
+    padding: 5px 20px;
+    text-align: left;
+}
+input {
+    margin: 10px;
+}
+}
+th {
+    font-weight: bold;
+}
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+img {
+    height: auto;
+    max-width: 100%;
+}
+pre {
+    display: block;
+    margin: 20px;
+    background: #424242;
+    color: #fff;
+    font-size: 13px;
+    white-space: pre-wrap;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    border: 1px solid #ccc;
+}
+</style>
+<script async="" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+<script type="text/x-mathjax-config">
+ MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$$','$$'], ['$','$'] ],
+      displayMath: [ ["\\[","\\]"] ],
+      processEscapes: true
+    }
+  });
+</script>
