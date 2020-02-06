@@ -42,7 +42,6 @@ load("brfss2013.RData")
 
 ### Health characteristics estimated from the BRFSS pertain to the non-institutionalized adult population, aged 18 years or older, who reside in the US. In 2013, additional question sets were included as optional modules to provide a measure for several childhood health and wellness indicators, including asthma prevalence for people aged 17 years or younger.
 
-*Dataset notes:*
 ### All missing values are coded NA
 
 ### Many variables, such as age, race, education, as well as variables that measure counts of events (drinks, times eating fruit, etc.) have alternate versions in the Calculated Variables section of the dataset. Review this section prior to choosing variables for analysis.
