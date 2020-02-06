@@ -74,7 +74,9 @@ It would be interesting to know about how the BMI category is affected by vegeta
 The mean and STD of sleeping hours  for different general health categories are computed. The following code shows the summary statistics of sleeping hours for four general health categories.
 
 ```{r}
-
+library(ggplot2)
+library(dplyr)
+library(plotly)
 df1 <-brfss2013 %>% filter(genhlth != "NA") %>% filter(genhlth == 'Poor') %>% filter(sleptim1 !='NA') %>% summarise(mean_poorhealth_sleep = mean(sleptim1), sd_poorhealth_sleep = sd(sleptim1), n = n())
 df1
 
