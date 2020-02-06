@@ -1,6 +1,3 @@
-### Load data
- 
-
 ```{r load-data}
 load("brfss2013.RData")
 ```
