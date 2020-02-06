@@ -257,9 +257,6 @@ mean_fruit_vector_bmi
 names <- c("Underweight", "NormalWeight", "Overweight", "Obese")
 barplot(mean_fruit_vector_bmi, names.arg=names, cex.names=.9, ylab = 'mean of fruits consumption', main='Mean of fruits consumption for various BMI categories', xlab="BMI category") 
 lines(mean_fruit_vector_bmi, col='Red')
-
-
-
 ```
 
 
@@ -267,16 +264,4 @@ lines(mean_fruit_vector_bmi, col='Red')
 
 It can be seen that normal weight BMI category people consume relatively more fruits and vegetables. On the average, obese people consume less vegetables and fruits.
 This relation of fruit and vegetable consumption with the BMI category is associational.
-
-
-
-
-
-
-
-
-
-
-
-
 
