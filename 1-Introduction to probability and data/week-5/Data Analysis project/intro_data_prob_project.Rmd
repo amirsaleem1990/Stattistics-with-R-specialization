@@ -27,6 +27,9 @@ your work.
 
 ```{r load-data}
 load("brfss2013.RData")
+df = brfss2013
+df <- df[df$X_age80 >= 18,]
+names(df) <- gsub("X_", "", names(df))
 ```
 
 
