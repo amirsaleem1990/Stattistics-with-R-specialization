@@ -43,6 +43,10 @@ Health characteristics estimated from the BRFSS pertain to the non-institutional
 
 *Dataset notes:*
 All missing values are coded NA
+
+Many variables, such as age, race, education, as well as variables that measure counts of events (drinks, times eating fruit, etc.) have alternate versions in the Calculated Variables section of the dataset. Review this section prior to choosing variables for analysis.
+
+
 * * *
 
 ## Part 2: Research questions
