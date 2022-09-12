@@ -17,14 +17,12 @@ movies$days_between_dev_and_thtr_rel_dates <- (movies$dvd_rel_date - movies$thtr
 #   No One 17 and Under Admitted. Clearly adult. Children are not admitted.
 
 
-# table(movies$runtime) %>% plot()
+movies %>% group_by(thtr_rel_year) %>% summarise(mean(days_between_dev_and_thtr_rel_dates))
 
-movies %>% group_by(thtr_rel_year) %>% summarise(mean(days_between_dev_and_thtr_rel_dates)) %>% plot()
 
-# movies %>% 
-#   select(studio, imdb_rating, thtr_rel_year) %>% 
-#   group_by(studio, thtr_rel_year) %>%
-#   summarise(avg_imdb_rating=mean(imdb_rating), count=c()) %>% 
-#   arrange(thtr_rel_year)
-# 
+
+
+
+
+
 
